@@ -19,22 +19,44 @@ namespace Appointmentv3.DAL
 
         public Appointment createAppointment(Appointment creatingAppointment)
         {
-            throw new NotImplementedException();
+            db.Appointments.Add(creatingAppointment);
+            db.SaveChanges();
+            return creatingAppointment;
         }
 
         public Appointment editAppointment(int appointmentID, Appointment editedAppointment)
         {
-            throw new NotImplementedException();
+            var appt = db.Appointments.Find(appointmentID);
+            if(appt == null)
+                return null;
+
+            db.Entry(editedAppointment).State = System.Data.Entity.EntityState.Modified;
+            return editedAppointment;
         }
 
         public Appointment getAppointment(int appointmentID)
         {
-            throw new NotImplementedException();
+            var appointmentById = db.Appointments.Find(appointmentID);
+            if (appointmentById == null)
+                return null;
+            return appointmentById;
         }
 
         public CardDetailsDTO getCardDetailsByDoctorID(int doctorID)
         {
-            throw new NotImplementedException();
+            var appointmentById = db.Appointments.Find(doctorID);
+            if (appointmentById == null)
+                return null;
+
+            CardDetailsDTO CardDetail = new CardDetailsDTO();
+
+            CardDetail.DoctorID = doctorID;
+            CardDetail.PetID = appointmentById.PetID;
+            CardDetail.AppointmentID = appointmentById.AppointmentID;
+            CardDetail.AppointmentDate = appointmentById.AppointmentDate;
+            CardDetail.AppointmentStatus = appointmentById.AppointmentStatus;
+
+            return CardDetail;
         }
 
         public CardDetailsDTO getCardDetailsByPetID(int petID)
@@ -49,27 +71,27 @@ namespace Appointmentv3.DAL
 
         public List<Clinic> getClinic()
         {
-            throw new NotImplementedException();
+            return db.Clinics.ToList();
         }
 
         public List<Medicine> getMedicine()
         {
-            throw new NotImplementedException();
+            return db.Medicines.ToList();
         }
 
         public List<PetIssue> getPetIssue()
         {
-            throw new NotImplementedException();
+            return db.PetIssues.ToList();
         }
 
         public List<Symptom> getSymptom()
         {
-            throw new NotImplementedException();
+            return db.Symptoms.ToList();
         }
 
         public List<Test> getTests()
         {
-            throw new NotImplementedException();
+            return db.Tests.ToList();
         }
     }
 }
