@@ -3,6 +3,7 @@ using Appointmentv3.COMMON.Entities;
 using Appointmentv3.COMMON.Entities.Preset;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Appointmentv3.DAL
 {
     public class AppointmentRepoAsync : IAppointmentRepoAsync
     {
+        AppointmentDbContext db = new AppointmentDbContext();
         public Task<Appointment> createAppointmentAsync(Appointment creatingAppointment)
         {
             throw new NotImplementedException();
@@ -51,9 +53,10 @@ namespace Appointmentv3.DAL
             throw new NotImplementedException();
         }
 
-        public Task<List<PetIssue>> getPetIssueAsync()
+        public async Task<List<PetIssue>> getPetIssueAsync()
         {
-            throw new NotImplementedException();
+            var petIssues = await db.PetIssues.ToListAsync();
+            return petIssues;
         }
 
         public PetIssue GetPetIssueByIdAsync(int id)
@@ -61,9 +64,10 @@ namespace Appointmentv3.DAL
             throw new NotImplementedException();
         }
 
-        public Task<List<Symptom>> getSymptomAsync()
+        public async Task<List<Symptom>> getSymptomAsync()
         {
-            throw new NotImplementedException();
+            var symptom = await db.Symptoms.ToListAsync();
+            return symptom;
         }
 
         public Task<List<Test>> getTestsAsync()
