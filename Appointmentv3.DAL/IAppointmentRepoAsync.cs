@@ -11,9 +11,9 @@ namespace Appointmentv3.DAL
 {
     public interface IAppointmentRepoAsync
     {
-        Task<List<CardDetailsDTO>> getCardDetailsByDoctorIDAsync(int doctorID);
-        Task<List<CardDetailsDTO>> getCardDetailsByPetIDAsync(int petID);
-        Task<List<CardDetailsDTO>> getCardDetailsForBookingAsync(int doctorID, DateTime date);
+        Task<List<Appointment>> getCardDetailsByDoctorIDAsync(int doctorID);
+        Task<List<Appointment>> getCardDetailsByPetIDAsync(int petID);
+        Task<List<Appointment>> getCardDetailsForBookingAsync(int doctorID, DateTime date);
         Task<List<Test>> getTestsAsync();
         Task<List<Clinic>> getClinicAsync();
         Task<List<Symptom>> getSymptomAsync();
