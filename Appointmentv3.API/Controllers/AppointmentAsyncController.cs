@@ -9,9 +9,5 @@ namespace Appointmentv3.API.Controllers
 {
     public class AppointmentAsyncController : ApiController
     {
-        public IHttpActionResult GET(int appointmentID)
-        {
-            var 
-        }
     }
 }
