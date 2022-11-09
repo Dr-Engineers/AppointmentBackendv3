@@ -49,12 +49,12 @@ namespace Appointmentv3.BL
             //var doctorClient = new RestClient();
 
             //var petRequest = new RestRequest("api/petId/{petId}/appId/{appId}", Method.Put);
-            //petRequest.AddUrlSegment("petId", newAppointment.PetID);
-            //petRequest.AddUrlSegment("appId", newAppointment.AppointmentID);
+            //petRequest.AddUrlSegment("petId", newAppointment.PetID);            
+            //petRequest.AddJsonBody(new { appointmentIdByAppointmentModule = newAppointment.AppointmentID });
 
             //var doctorRequest = new RestRequest("api/Doctors/AssignAppointmentToDoctor/{doctorId}", Method.Put);
             //doctorRequest.AddUrlSegment("doctorId", newAppointment.DoctorID);
-            //doctorRequest.AddUrlSegment("appId", newAppointment.AppointmentID);
+            //doctorRequest.AddJsonBody(new { appointmentIdByAppointmentModule = newAppointment.AppointmentID });
 
             //petClient.Execute(petRequest);
             //doctorClient.Execute(doctorRequest);
