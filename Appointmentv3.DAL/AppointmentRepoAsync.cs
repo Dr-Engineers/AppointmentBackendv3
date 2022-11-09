@@ -28,17 +28,17 @@ namespace Appointmentv3.DAL
             throw new NotImplementedException();
         }
 
-        public Task<List<CardDetailsDTO>> getCardDetailsByDoctorIDAsync(int doctorID)
+        public Task<List<Appointment>> getCardDetailsByDoctorIDAsync(int doctorID)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<CardDetailsDTO>> getCardDetailsByPetIDAsync(int petID)
+        public Task<List<Appointment>> getCardDetailsByPetIDAsync(int petID)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<CardDetailsDTO>> getCardDetailsForBookingAsync(int doctorID, DateTime date)
+        public Task<List<Appointment>> getCardDetailsForBookingAsync(int doctorID, DateTime date)
         {
             throw new NotImplementedException();
         }

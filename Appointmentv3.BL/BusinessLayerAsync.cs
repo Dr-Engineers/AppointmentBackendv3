@@ -13,7 +13,6 @@ namespace Appointmentv3.BL
     public class BusinessLayerAsync : IBusinessLayerAsync
     {
         IAppointmentRepoAsync repo = null;
-
         public BusinessLayerAsync(IAppointmentRepoAsync repo)
         {
             this.repo = repo;
