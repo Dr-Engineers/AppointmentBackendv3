@@ -68,7 +68,7 @@ namespace Appointmentv3.DAL
 
         public Task<List<Test>> getTestsAsync()
         {
-            throw new NotImplementedException();
+            return db.Tests.ToList();
         }
     }
 }

@@ -63,7 +63,7 @@ namespace Appointmentv3.BL
 
         public Task<List<Test>> getTestsAsync()
         {
-            throw new NotImplementedException();
+            return this.repo.getTestsAsync();
         }
     }
 }
