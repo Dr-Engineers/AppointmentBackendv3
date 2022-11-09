@@ -1,0 +1,26 @@
+﻿using Appointmentv3.COMMON.DTO;
+using Appointmentv3.COMMON.Entities.Preset;
+using Appointmentv3.COMMON.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Appointmentv3.DAL
+{
+    public interface IAppointmentRepo
+    {
+        CardDetailsDTO getCardDetailsByDoctorID(int doctorID);
+        CardDetailsDTO getCardDetailsByPetID(int petID);
+        CardDetailsDTO getCardDetailsForBooking(int doctorID, DateTime date);
+        List<Test> getTests();
+        List<Clinic> getClinic();
+        List<Symptom> getSymptom();
+        List<PetIssue> getPetIssue();
+        List<Medicine> getMedicine();
+        Appointment getAppointment(int appointmentID);
+        Appointment editAppointment(int appointmentID, Appointment editedAppointment);
+        Appointment createAppointment(Appointment creatingAppointment);
+    }
+}
