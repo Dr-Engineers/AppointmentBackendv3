@@ -21,6 +21,7 @@ namespace Appointmentv3.API.Controllers
         public IHttpActionResult GET()
         {
             return Ok(bl.getClinic());
+
         }
     }
 }
