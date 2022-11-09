@@ -18,6 +18,7 @@ namespace Appointmentv3.DAL
         List<Clinic> getClinic();
         List<Symptom> getSymptom();
         List<PetIssue> getPetIssue();
+        PetIssue GetPetIssueById(int id);
         List<Medicine> getMedicine();
         Appointment getAppointment(int appointmentID);
         Appointment editAppointment(int appointmentID, Appointment editedAppointment);

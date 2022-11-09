@@ -130,6 +130,11 @@ namespace Appointmentv3.DAL
             return db.PetIssues.ToList();
         }
 
+        public PetIssue GetPetIssueById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Symptom> getSymptom()
         {
             return db.Symptoms.ToList();
