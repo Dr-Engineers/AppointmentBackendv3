@@ -53,27 +53,34 @@ namespace Appointmentv3.DAL
 
         public List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID)
         {
-            var appointmentById = db.Appointments.Find(doctorID);
-            if (appointmentById == null)
+            var appointmentByDocId = db.Appointments.Where(appt => appt.DoctorID == doctorID).ToList();
+
+            if (appointmentByDocId == null)
                 return null;
 
-            CardDetailsDTO CardDetail = new CardDetailsDTO();
+            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
+            foreach (var ApptId in appointmentByDocId)
+            {
+                CardDetailsDTO CardDetail = new CardDetailsDTO();
 
-            CardDetail.DoctorID = doctorID;
-            CardDetail.PetID = appointmentById.PetID;
-            CardDetail.AppointmentID = appointmentById.AppointmentID;
-            CardDetail.AppointmentDate = appointmentById.AppointmentDate;
-            CardDetail.AppointmentStatus = appointmentById.AppointmentStatus;
+                CardDetail.DoctorID = ApptId.DoctorID;
+                CardDetail.PetID = ApptId.PetID;
+                CardDetail.AppointmentID = ApptId.AppointmentID;
+                CardDetail.AppointmentDate = ApptId.AppointmentDate;
+                CardDetail.AppointmentStatus = ApptId.AppointmentStatus;
 
-            return CardDetail;
+                CardDetails.Add(CardDetail);
+            }
+
+            return CardDetails;
         }
 
-        public CardDetailsDTO getCardDetailsByPetID(int petID)
+        public List<CardDetailsDTO> getCardDetailsByPetID(int petID)
         {
             throw new NotImplementedException();
         }
 
-        public CardDetailsDTO getCardDetailsForBooking(int doctorID, DateTime date)
+        public List<CardDetailsDTO> getCardDetailsForBooking(int doctorID, DateTime date)
         {
             throw new NotImplementedException();
         }
