@@ -32,7 +32,7 @@ namespace Appointmentv3.DAL
             throw new NotImplementedException();
         }
 
-        public CardDetailsDTO getCardDetailsByDoctorID(int doctorID)
+        public List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID)
         {
             throw new NotImplementedException();
         }
