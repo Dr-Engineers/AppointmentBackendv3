@@ -70,9 +70,9 @@ namespace Appointmentv3.BL
             return await this.repo.getSymptomAsync();
         }
 
-        public Task<List<Test>> getTestsAsync()
+        public async Task<List<Test>> getTestsAsync()
         {
-            return this.repo.getTestsAsync();
+            return await this.repo.getTestsAsync();
         }
     }
 }
