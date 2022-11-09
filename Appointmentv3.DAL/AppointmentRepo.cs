@@ -51,7 +51,7 @@ namespace Appointmentv3.DAL
             return appointmentById;
         }
 
-        public CardDetailsDTO getCardDetailsByDoctorID(int doctorID)
+        public List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID)
         {
             var appointmentById = db.Appointments.Find(doctorID);
             if (appointmentById == null)
