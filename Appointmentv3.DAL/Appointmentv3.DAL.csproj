@@ -54,6 +54,7 @@
     <Compile Include="AppointmentDbContext.cs" />
     <Compile Include="AppointmentRepo.cs" />
     <Compile Include="IAppointmentRepo.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
