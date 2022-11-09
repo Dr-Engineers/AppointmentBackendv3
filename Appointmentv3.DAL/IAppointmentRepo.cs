@@ -11,13 +11,14 @@ namespace Appointmentv3.DAL
 {
     public interface IAppointmentRepo
     {
-        CardDetailsDTO getCardDetailsByDoctorID(int doctorID);
-        CardDetailsDTO getCardDetailsByPetID(int petID);
-        CardDetailsDTO getCardDetailsForBooking(int doctorID, DateTime date);
+        List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID);
+        List<CardDetailsDTO> getCardDetailsByPetID(int petID);
+        List<CardDetailsDTO> getCardDetailsForBooking(int doctorID, DateTime date);
         List<Test> getTests();
         List<Clinic> getClinic();
         List<Symptom> getSymptom();
         List<PetIssue> getPetIssue();
+        PetIssue GetPetIssueById(int id);
         List<Medicine> getMedicine();
         Appointment getAppointment(int appointmentID);
         Appointment editAppointment(int appointmentID, Appointment editedAppointment);

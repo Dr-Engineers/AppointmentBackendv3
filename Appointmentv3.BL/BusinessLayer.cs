@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Appointmentv3.DAL;
+using RestSharp;
 
 namespace Appointmentv3.BL
 {
@@ -20,30 +21,68 @@ namespace Appointmentv3.BL
 
         public Appointment createAppointment(CreatingAppointmentDTO creatingAppointment)
         {
-            throw new NotImplementedException();
+            if (creatingAppointment == null)
+                return null;
+
+            Appointment appointment = new Appointment();
+            appointment.PetID = creatingAppointment.PetID;
+            appointment.DoctorID = creatingAppointment.DoctorID;
+            appointment.AppointmentDate = creatingAppointment.AppoitmentDate;
+            appointment.Reason = creatingAppointment.Reason;
+            foreach (var id in creatingAppointment.PetIssues)
+            {
+                PetIssue petIssue = this.repo.GetPetIssueById(id);
+                ObservedPetIssue observedPetIssue = new ObservedPetIssue { PetIssue =  petIssue};
+                appointment.ObservedPetIssueID.Add(observedPetIssue);
+            }
+            // Default values For the appointment
+            appointment.AppointmentStatus = Status.Confirmed;
+            appointment.RecommendationID = new List<Recommendation>();
+            appointment.PrescribedTestID = new List<PrescribedTest>();
+            appointment.Prescription = new List<PrescribedMedicine>();
+            appointment.DiagnosedSymptomID = new List<DiagnosedSymptom>();
+            appointment.VitalID = new Vital();
+            
+            var newAppointment = this.repo.createAppointment(appointment);
+
+            //var petClient = new RestClient();
+            //var doctorClient = new RestClient();
+
+            //var petRequest = new RestRequest("api/petId/{petId}/appId/{appId}", Method.Put);
+            //petRequest.AddUrlSegment("petId", newAppointment.PetID);
+            //petRequest.AddUrlSegment("appId", newAppointment.AppointmentID);
+
+            //var doctorRequest = new RestRequest("api/Doctors/AssignAppointmentToDoctor/{doctorId}", Method.Put);
+            //doctorRequest.AddUrlSegment("doctorId", newAppointment.DoctorID);
+            //doctorRequest.AddUrlSegment("appId", newAppointment.AppointmentID);
+
+            //petClient.Execute(petRequest);
+            //doctorClient.Execute(doctorRequest);
+
+            return newAppointment;
         }
 
         public Appointment editAppointment(int appointmentID, Appointment editedAppointment)
         {
-            throw new NotImplementedException();
+            return this.repo.editAppointment(appointmentID, editedAppointment);
         }
 
         public Appointment getAppointment(int appointmentID)
         {
-            throw new NotImplementedException();
+            return this.repo.getAppointment(appointmentID);
         }
 
-        public CardDetailsDTO getCardDetailsByDoctorID(int doctorID)
+        public List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID)
         {
             throw new NotImplementedException();
         }
 
-        public CardDetailsDTO getCardDetailsByPetID(int petID)
+        public List<CardDetailsDTO> getCardDetailsByPetID(int petID)
         {
             throw new NotImplementedException();
         }
 
-        public CardDetailsDTO getCardDetailsForBooking(int doctorID, DateTime date)
+        public List<CardDetailsDTO> getCardDetailsForBooking(int doctorID, DateTime date)
         {
             throw new NotImplementedException();
         }
@@ -55,17 +94,17 @@ namespace Appointmentv3.BL
 
         public List<Medicine> getMedicine()
         {
-            throw new NotImplementedException();
+            return this.getMedicine();
         }
 
         public List<PetIssue> getPetIssue()
         {
-            throw new NotImplementedException();
+            return this.getPetIssue();
         }
 
         public List<Symptom> getSymptom()
         {
-            throw new NotImplementedException();
+            return this.getSymptom();
         }
 
         public List<Test> getTests()

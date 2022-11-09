@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Appointmentv3.BL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -21,7 +22,6 @@ namespace Appointmentv3.API.Controllers
         public IHttpActionResult GET()
         {
             return Ok(bl.getClinic());
-
         }
     }
 }
