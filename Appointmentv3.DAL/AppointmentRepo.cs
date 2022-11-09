@@ -27,10 +27,19 @@ namespace Appointmentv3.DAL
         public Appointment editAppointment(int appointmentID, Appointment editedAppointment)
         {
             var appt = db.Appointments.Find(appointmentID);
+
             if(appt == null)
                 return null;
 
-            db.Entry(editedAppointment).State = System.Data.Entity.EntityState.Modified;
+            appt = editedAppointment;
+
+            db.Entry(appt).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.ObservedPetIssueID).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.Prescription).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.DiagnosedSymptomID).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.PrescribedTestID).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.RecommendationID).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
             return editedAppointment;
         }
 
