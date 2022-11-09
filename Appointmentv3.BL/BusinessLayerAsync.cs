@@ -1,6 +1,7 @@
 ﻿using Appointmentv3.COMMON.DTO;
 using Appointmentv3.COMMON.Entities;
 using Appointmentv3.COMMON.Entities.Preset;
+using Appointmentv3.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,11 @@ namespace Appointmentv3.BL
 {
     public class BusinessLayerAsync : IBusinessLayerAsync
     {
+        IAppointmentRepoAsync repo=null;
+        public BusinessLayerAsync(IAppointmentRepoAsync repo)
+        {
+            this.repo = repo;
+        }
         public Task<Appointment> createAppointmentAsync(CreatingAppointmentDTO creatingAppointment)
         {
             throw new NotImplementedException();
@@ -41,14 +47,16 @@ namespace Appointmentv3.BL
             throw new NotImplementedException();
         }
 
-        public Task<List<Clinic>> getClinicAsync()
+        public async Task<List<Clinic>> getClinicAsync()
         {
-            throw new NotImplementedException();
+           // var clinics = this.repo.getClinicAsync();
+           //return clinics.GetAwaiter().GetResult();
+            return await this.repo.getClinicAsync();
         }
 
-        public Task<List<Medicine>> getMedicineAsync()
+        public async Task<List<Medicine>> getMedicineAsync()
         {
-            throw new NotImplementedException();
+            return await this.repo.getMedicineAsync();
         }
 
         public Task<List<PetIssue>> getPetIssueAsync()
