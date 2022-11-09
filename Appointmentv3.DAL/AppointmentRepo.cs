@@ -19,57 +19,95 @@ namespace Appointmentv3.DAL
 
         public Appointment createAppointment(Appointment creatingAppointment)
         {
-            throw new NotImplementedException();
+            db.Appointments.Add(creatingAppointment);
+            db.SaveChanges();
+            return creatingAppointment;
         }
 
         public Appointment editAppointment(int appointmentID, Appointment editedAppointment)
         {
-            throw new NotImplementedException();
+            var appt = db.Appointments.Find(appointmentID);
+
+            if(appt == null)
+                return null;
+
+            appt = editedAppointment;
+
+            db.Entry(appt).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.ObservedPetIssueID).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.Prescription).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.DiagnosedSymptomID).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.PrescribedTestID).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.RecommendationID).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return editedAppointment;
         }
 
         public Appointment getAppointment(int appointmentID)
         {
-            throw new NotImplementedException();
+            var appointmentById = db.Appointments.Find(appointmentID);
+            if (appointmentById == null)
+                return null;
+            return appointmentById;
         }
 
-        public CardDetailsDTO getCardDetailsByDoctorID(int doctorID)
+        public List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID)
+        {
+            var appointmentByDocId = db.Appointments.Where(appt => appt.DoctorID == doctorID).ToList();
+
+            if (appointmentByDocId == null)
+                return null;
+
+            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
+            foreach (var ApptId in appointmentByDocId)
+            {
+                CardDetailsDTO CardDetail = new CardDetailsDTO();
+
+                CardDetail.DoctorID = ApptId.DoctorID;
+                CardDetail.PetID = ApptId.PetID;
+                CardDetail.AppointmentID = ApptId.AppointmentID;
+                CardDetail.AppointmentDate = ApptId.AppointmentDate;
+                CardDetail.AppointmentStatus = ApptId.AppointmentStatus;
+
+                CardDetails.Add(CardDetail);
+            }
+
+            return CardDetails;
+        }
+
+        public List<CardDetailsDTO> getCardDetailsByPetID(int petID)
         {
             throw new NotImplementedException();
         }
 
-        public CardDetailsDTO getCardDetailsByPetID(int petID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public CardDetailsDTO getCardDetailsForBooking(int doctorID, DateTime date)
+        public List<CardDetailsDTO> getCardDetailsForBooking(int doctorID, DateTime date)
         {
             throw new NotImplementedException();
         }
 
         public List<Clinic> getClinic()
         {
-            throw new NotImplementedException();
+            return db.Clinics.ToList();
         }
 
         public List<Medicine> getMedicine()
         {
-            throw new NotImplementedException();
+            return db.Medicines.ToList();
         }
 
         public List<PetIssue> getPetIssue()
         {
-            throw new NotImplementedException();
+            return db.PetIssues.ToList();
         }
 
         public List<Symptom> getSymptom()
         {
-            throw new NotImplementedException();
+            return db.Symptoms.ToList();
         }
 
         public List<Test> getTests()
         {
-            throw new NotImplementedException();
+            return db.Tests.ToList();
         }
     }
 }
