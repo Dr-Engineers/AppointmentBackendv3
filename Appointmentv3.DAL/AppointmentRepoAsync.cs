@@ -43,14 +43,17 @@ namespace Appointmentv3.DAL
             throw new NotImplementedException();
         }
 
-        public Task<List<Clinic>> getClinicAsync()
+        public async Task<List<Clinic>> getClinicAsync()
         {
-            throw new NotImplementedException();
+            var clinics = await db.Clinics.ToListAsync();
+            return clinics;
+            
         }
 
-        public Task<List<Medicine>> getMedicineAsync()
+        public async Task<List<Medicine>> getMedicineAsync()
         {
-            throw new NotImplementedException();
+            var medicines=await db.Medicines.ToListAsync();
+            return medicines;
         }
 
         public async Task<List<PetIssue>> getPetIssueAsync()
