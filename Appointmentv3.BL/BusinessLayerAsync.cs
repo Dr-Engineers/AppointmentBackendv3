@@ -60,14 +60,14 @@ namespace Appointmentv3.BL
             return await this.repo.getMedicineAsync();
         }
 
-        public Task<List<PetIssue>> getPetIssueAsync()
+        public async Task<List<PetIssue>> getPetIssueAsync()
         {
-            throw new NotImplementedException();
+            return await this.repo.getPetIssueAsync();
         }
 
-        public Task<List<Symptom>> getSymptomAsync()
+        public async Task<List<Symptom>> getSymptomAsync()
         {
-            throw new NotImplementedException();
+            return await this.repo.getSymptomAsync();
         }
 
         public Task<List<Test>> getTestsAsync()

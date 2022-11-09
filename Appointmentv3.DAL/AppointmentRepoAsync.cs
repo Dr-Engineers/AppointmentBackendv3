@@ -56,9 +56,10 @@ namespace Appointmentv3.DAL
             return medicines;
         }
 
-        public Task<List<PetIssue>> getPetIssueAsync()
+        public async Task<List<PetIssue>> getPetIssueAsync()
         {
-            throw new NotImplementedException();
+            var petIssues = await db.PetIssues.ToListAsync();
+            return petIssues;
         }
 
         public PetIssue GetPetIssueByIdAsync(int id)
@@ -66,9 +67,10 @@ namespace Appointmentv3.DAL
             throw new NotImplementedException();
         }
 
-        public Task<List<Symptom>> getSymptomAsync()
+        public async Task<List<Symptom>> getSymptomAsync()
         {
-            throw new NotImplementedException();
+            var symptom = await db.Symptoms.ToListAsync();
+            return symptom;
         }
 
         public Task<List<Test>> getTestsAsync()
