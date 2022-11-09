@@ -77,12 +77,42 @@ namespace Appointmentv3.DAL
 
         public List<CardDetailsDTO> getCardDetailsByPetID(int petID)
         {
-            throw new NotImplementedException();
+            var appointmentByPetID = db.Appointments.Where(appt => appt.PetID == petID);
+            if (appointmentByPetID == null)
+                return null;
+            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
+            foreach(var ApptId in appointmentByPetID)
+            {
+                CardDetailsDTO cardDetails = new CardDetailsDTO();
+                cardDetails.DoctorID = ApptId.DoctorID;
+                cardDetails.PetID = ApptId.PetID;
+                cardDetails.AppointmentID = ApptId.AppointmentID;
+                cardDetails.AppointmentDate = ApptId.AppointmentDate;
+                cardDetails.AppointmentStatus = ApptId.AppointmentStatus;
+
+                CardDetails.Add(cardDetails);
+            }
+            return CardDetails;
         }
 
         public List<CardDetailsDTO> getCardDetailsForBooking(int doctorID, DateTime date)
         {
-            throw new NotImplementedException();
+            var appointmentByPetID = db.Appointments.Where(appt => appt.DoctorID == doctorID && appt.AppointmentDate == date);
+            if (appointmentByPetID == null)
+                return null;
+            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
+            foreach (var ApptId in appointmentByPetID)
+            {
+                CardDetailsDTO cardDetails = new CardDetailsDTO();
+                cardDetails.DoctorID = ApptId.DoctorID;
+                cardDetails.PetID = ApptId.PetID;
+                cardDetails.AppointmentID = ApptId.AppointmentID;
+                cardDetails.AppointmentDate = ApptId.AppointmentDate;
+                cardDetails.AppointmentStatus = ApptId.AppointmentStatus;
+
+                CardDetails.Add(cardDetails);
+            }
+            return CardDetails;
         }
 
         public List<Clinic> getClinic()
