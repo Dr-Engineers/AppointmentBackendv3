@@ -74,7 +74,7 @@ namespace Appointmentv3.BL
 
         public List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID)
         {
-            throw new NotImplementedException();
+            return this.repo.getCardDetailsByDoctorID(doctorID);
         }
 
         public List<CardDetailsDTO> getCardDetailsByPetID(int petID)
