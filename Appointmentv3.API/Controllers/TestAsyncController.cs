@@ -16,9 +16,8 @@ namespace Appointmentv3.API.Controllers
             this.bl = bl;
         }
 
-        public async IHttpActionResult GET()
+        public IHttpActionResult GET()
         {
-            var test = await bl.getTestsAsync();
             return  Ok(bl.getTestsAsync());
         }
     }
