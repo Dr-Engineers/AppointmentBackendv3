@@ -28,6 +28,7 @@ namespace Appointmentv3.BL
             appointment.PetID = creatingAppointment.PetID;
             appointment.DoctorID = creatingAppointment.DoctorID;
             appointment.AppointmentDate = creatingAppointment.AppoitmentDate;
+            appointment.Reason = creatingAppointment.Reason;
             foreach (var id in creatingAppointment.PetIssues)
             {
                 PetIssue petIssue = this.repo.GetPetIssueById(id);
@@ -41,8 +42,7 @@ namespace Appointmentv3.BL
             appointment.Prescription = new List<PrescribedMedicine>();
             appointment.DiagnosedSymptomID = new List<DiagnosedSymptom>();
             appointment.VitalID = new Vital();
-            appointment.Reason = null;
-
+            
             var newAppointment = this.repo.createAppointment(appointment);
 
             //var petClient = new RestClient();
@@ -52,7 +52,7 @@ namespace Appointmentv3.BL
             //petRequest.AddUrlSegment("petId", newAppointment.PetID);
             //petRequest.AddUrlSegment("appId", newAppointment.AppointmentID);
 
-            //var doctorRequest = new RestRequest("api/doctorId/{doctorId}/appId/{appId}", Method.Put);
+            //var doctorRequest = new RestRequest("api/Doctors/AssignAppointmentToDoctor/{doctorId}", Method.Put);
             //doctorRequest.AddUrlSegment("doctorId", newAppointment.DoctorID);
             //doctorRequest.AddUrlSegment("appId", newAppointment.AppointmentID);
 
