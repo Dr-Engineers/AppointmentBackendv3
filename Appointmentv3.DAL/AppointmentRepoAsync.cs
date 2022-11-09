@@ -3,6 +3,7 @@ using Appointmentv3.COMMON.Entities;
 using Appointmentv3.COMMON.Entities.Preset;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Appointmentv3.DAL
 {
     public class AppointmentRepoAsync : IAppointmentRepoAsync
     {
+        AppointmentDbContext db = new AppointmentDbContext();
         public Task<Appointment> createAppointmentAsync(Appointment creatingAppointment)
         {
             throw new NotImplementedException();
@@ -26,29 +28,32 @@ namespace Appointmentv3.DAL
             throw new NotImplementedException();
         }
 
-        public Task<List<CardDetailsDTO>> getCardDetailsByDoctorIDAsync(int doctorID)
+        public Task<List<Appointment>> getCardDetailsByDoctorIDAsync(int doctorID)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<CardDetailsDTO>> getCardDetailsByPetIDAsync(int petID)
+        public Task<List<Appointment>> getCardDetailsByPetIDAsync(int petID)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<CardDetailsDTO>> getCardDetailsForBookingAsync(int doctorID, DateTime date)
+        public Task<List<Appointment>> getCardDetailsForBookingAsync(int doctorID, DateTime date)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Clinic>> getClinicAsync()
+        public async Task<List<Clinic>> getClinicAsync()
         {
-            throw new NotImplementedException();
+            var clinics = await db.Clinics.ToListAsync();
+            return clinics;
+            
         }
 
-        public Task<List<Medicine>> getMedicineAsync()
+        public async Task<List<Medicine>> getMedicineAsync()
         {
-            throw new NotImplementedException();
+            var medicines=await db.Medicines.ToListAsync();
+            return medicines;
         }
 
         public Task<List<PetIssue>> getPetIssueAsync()
