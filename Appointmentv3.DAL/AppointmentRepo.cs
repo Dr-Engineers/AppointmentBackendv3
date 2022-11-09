@@ -37,12 +37,12 @@ namespace Appointmentv3.DAL
             throw new NotImplementedException();
         }
 
-        public CardDetailsDTO getCardDetailsByPetID(int petID)
+        public List<CardDetailsDTO> getCardDetailsByPetID(int petID)
         {
             throw new NotImplementedException();
         }
 
-        public CardDetailsDTO getCardDetailsForBooking(int doctorID, DateTime date)
+        public List<CardDetailsDTO> getCardDetailsForBooking(int doctorID, DateTime date)
         {
             throw new NotImplementedException();
         }
@@ -58,6 +58,11 @@ namespace Appointmentv3.DAL
         }
 
         public List<PetIssue> getPetIssue()
+        {
+            throw new NotImplementedException();
+        }
+
+        public PetIssue GetPetIssueById(int id)
         {
             throw new NotImplementedException();
         }
