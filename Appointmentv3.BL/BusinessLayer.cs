@@ -74,42 +74,42 @@ namespace Appointmentv3.BL
 
         public List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID)
         {
-            throw new NotImplementedException();
+            return this.repo.getCardDetailsByDoctorID(doctorID);
         }
 
         public List<CardDetailsDTO> getCardDetailsByPetID(int petID)
         {
-            throw new NotImplementedException();
+            return this.repo.getCardDetailsByPetID(petID);
         }
 
         public List<CardDetailsDTO> getCardDetailsForBooking(int doctorID, DateTime date)
         {
-            throw new NotImplementedException();
+            return this.repo.getCardDetailsForBooking(doctorID, date);
         }
 
         public List<Clinic> getClinic()
         {
-            throw new NotImplementedException();
+            return this.repo.getClinic();
         }
 
         public List<Medicine> getMedicine()
         {
-            return this.getMedicine();
+            return this.repo.getMedicine();
         }
 
         public List<PetIssue> getPetIssue()
         {
-            return this.getPetIssue();
+            return this.repo.getPetIssue();
         }
 
         public List<Symptom> getSymptom()
         {
-            return this.getSymptom();
+            return this.repo.getSymptom();
         }
 
         public List<Test> getTests()
         {
-            throw new NotImplementedException();
+            return this.repo.getTests();
         }
     }
 }
