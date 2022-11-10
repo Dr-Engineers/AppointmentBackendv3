@@ -52,21 +52,18 @@ namespace Appointmentv3.BL
             
             var newAppointment = this.repo.createAppointment(appointment);
 
-            //var petClient = new RestClient();
-            //var doctorClient = new RestClient();
+            var petClient = new RestClient();
+            var doctorClient = new RestClient();
 
-            //var petRequest = new RestRequest("api/petId/{petId}/appId/{appId}", Method.Put);
-            //petRequest.AddUrlSegment("petId", newAppointment.PetID);            
-            //petRequest.AddJsonBody(new { appointmentIdByAppointmentModule = newAppointment.AppointmentID });
+            var petRequest = new RestRequest("api/Pet/AddAppointment", Method.Put);
+            petRequest.AddJsonBody(new { petId = newAppointment.PetID, AppointmentId = newAppointment.AppointmentID });
 
-            //var doctorRequest = new RestRequest("api/Doctors/AssignAppointmentToDoctor/{doctorId}", Method.Put);
-            //doctorRequest.AddUrlSegment("doctorId", newAppointment.DoctorID);
-            //doctorRequest.AddJsonBody(new { appointmentIdByAppointmentModule = newAppointment.AppointmentID });
+            var doctorRequest = new RestRequest("api/Doctors/AssignAppointmentToDoctor/{doctorId}", Method.Put);
+            doctorRequest.AddUrlSegment("doctorId", newAppointment.DoctorID);
+            doctorRequest.AddJsonBody(new { appointmentIdByAppointmentModule = newAppointment.AppointmentID });
 
-            //petClient.Execute(petRequest);
-            //doctorClient.Execute(doctorRequest);
-
-
+            petClient.Execute(petRequest);
+            doctorClient.Execute(doctorRequest);
 
             return newAppointment;
         }
