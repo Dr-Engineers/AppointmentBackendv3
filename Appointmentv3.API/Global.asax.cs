@@ -20,6 +20,7 @@ namespace Appointmentv3.API
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalConfiguration.Configuration.Filters.Add(new ElmahHandleErrorApiAttribute());
+
         }
     }
 }
