@@ -24,6 +24,13 @@ namespace Appointmentv3.BL
             if (creatingAppointment == null)
                 return null;
 
+            var TimeTable = await this.repo.getCardDetailsByPetIDAsync(creatingAppointment.PetID);
+            foreach (var time in TimeTable)
+            {
+                if (time.AppointmentDate == creatingAppointment.AppoitmentDate)
+                    throw new CannotBookAppointment("Your Pet already has an appointment at this selected time slot");
+            }
+
             Appointment appointment = new Appointment();
             appointment.PetID = creatingAppointment.PetID;
             appointment.DoctorID = creatingAppointment.DoctorID;
