@@ -26,7 +26,7 @@ namespace Appointmentv3.API.Controllers
         {
             var appointmentData = repo.getAppointment(AppointmentId);
             if (appointmentData == null)
-                return NotFound();
+                throw new HttpException(404, $"No Appointment with Appointment ID: {AppointmentId}");
 
             return Ok(appointmentData);
         }
@@ -36,7 +36,7 @@ namespace Appointmentv3.API.Controllers
         public IHttpActionResult PostAppointment(CreatingAppointmentDTO creatingAppointment)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                throw new HttpException(400, "All fields not filled");
             Appointment appt = repo.createAppointment(creatingAppointment);
             return Created($"api/GetAppointmentDetails/{appt.AppointmentID}", appt);
 
@@ -47,7 +47,7 @@ namespace Appointmentv3.API.Controllers
         public IHttpActionResult editAppointment(int appointmentID, Appointment editedAppointment)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                throw new HttpException(400, "All fields not filled");
             repo.editAppointment(appointmentID, editedAppointment);
             return Ok();
         }
