@@ -10,7 +10,7 @@ namespace Appointmentv3.COMMON.Entities
     public class Recommendation
     {
         public int RecommendationID { get; set; }
-        public List<Clinic> RecommendedClinic { get; set; }
-        public List<Doctor> RecommendedDoctor { get; set; }
+        public virtual List<Clinic> RecommendedClinic { get; set; }
+        public virtual List<Doctor> RecommendedDoctor { get; set; }
     }
 }

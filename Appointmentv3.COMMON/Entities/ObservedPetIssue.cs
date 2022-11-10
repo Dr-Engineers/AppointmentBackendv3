@@ -10,6 +10,6 @@ namespace Appointmentv3.COMMON.Entities
     public class ObservedPetIssue
     {
         public int ObservedPetIssueID { get; set; }
-        public PetIssue PetIssue { get; set; }
+        public virtual PetIssue PetIssue { get; set; }
     }
 }

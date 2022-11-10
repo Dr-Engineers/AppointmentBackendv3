@@ -13,12 +13,12 @@ namespace Appointmentv3.COMMON.Entities
         public int DoctorID { get; set; }
         public DateTime AppointmentDate { get; set; }
         public Status AppointmentStatus { get; set; }
-        public List<ObservedPetIssue> ObservedPetIssueID { get; set; }
+        public virtual List<ObservedPetIssue> ObservedPetIssueID { get; set; }
         public string Reason { get; set; }
-        public List<PrescribedMedicine> Prescription { get; set; }
-        public List<DiagnosedSymptom> DiagnosedSymptomID { get; set; }
-        public Vital VitalID { get; set; }
-        public List<PrescribedTest> PrescribedTestID { get; set; }
-        public List<Recommendation> RecommendationID { get; set; }
+        public virtual List<PrescribedMedicine> Prescription { get; set; }
+        public virtual List<DiagnosedSymptom> DiagnosedSymptomID { get; set; }
+        public virtual Vital VitalID { get; set; }
+        public virtual List<PrescribedTest> PrescribedTestID { get; set; }
+        public virtual List<Recommendation> RecommendationID { get; set; }
     }
 }

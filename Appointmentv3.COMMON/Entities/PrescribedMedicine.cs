@@ -10,7 +10,7 @@ namespace Appointmentv3.COMMON.Entities
     public class PrescribedMedicine
     {
         public int PrescribedMedicineID { get; set; }
-        public Medicine Medicine { get; set; }
+        public virtual Medicine Medicine { get; set; }
         public int Days { get; set; }
         public bool Morning { get; set; }
         public bool Afternoon { get; set; }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace Appointmentv3.API.Controllers
@@ -26,8 +27,7 @@ namespace Appointmentv3.API.Controllers
         {
             var appointmentData =  await repo.getAppointmentAsync(AppointmentId);
             if (appointmentData == null)
-                return NotFound();
-
+                throw new HttpException(404, $"No Appointment with Appointment ID: {AppointmentId}");
             return Ok(appointmentData);
         }
 
@@ -36,7 +36,7 @@ namespace Appointmentv3.API.Controllers
         public async Task<IHttpActionResult> PostAppointment(CreatingAppointmentDTO creatingAppointment)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                throw new HttpException(400, "All fields not filled");
             Appointment appt = await repo.createAppointmentAsync(creatingAppointment);
             return Created($"api/GetAppointmentDetails/{appt.AppointmentID}", appt);
 
@@ -47,7 +47,7 @@ namespace Appointmentv3.API.Controllers
         public async Task<IHttpActionResult> editAppointment(int appointmentID, Appointment editedAppointment)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                throw new HttpException(400, "All fields not filled");
             await repo.editAppointmentAsync(appointmentID, editedAppointment);
             return Ok();
         }
