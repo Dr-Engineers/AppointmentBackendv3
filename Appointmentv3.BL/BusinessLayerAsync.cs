@@ -36,6 +36,7 @@ namespace Appointmentv3.BL
             appointment.DoctorID = creatingAppointment.DoctorID;
             appointment.AppointmentDate = creatingAppointment.AppoitmentDate;
             appointment.Reason = creatingAppointment.Reason;
+            appointment.ObservedPetIssueID = new List<ObservedPetIssue>();
             foreach (var id in creatingAppointment.PetIssues)
             {
                 PetIssue petIssue = await this.repo.GetPetIssueByIdAsync(id);
