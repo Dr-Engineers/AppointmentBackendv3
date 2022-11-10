@@ -17,6 +17,8 @@ namespace Appointmentv3.API.Controllers
             this.bl = bl;
         }
 
+        [HttpGet]
+        [Route("api/async/petIssue")]
         public async Task<IHttpActionResult> GET()
         {
             var petIssues = await bl.getPetIssueAsync();
