@@ -23,7 +23,7 @@ namespace Appointmentv3.API.Controllers
         public IHttpActionResult GET()
         {
             var tests = bl.getTests();
-            if (tests.Count() == 0)
+            if (tests.Count == 0)
                 throw new HttpException(404, "Tests data not available");
             return Ok(bl.getTests());
         }
