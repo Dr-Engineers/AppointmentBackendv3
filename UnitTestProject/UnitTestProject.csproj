@@ -94,6 +94,10 @@
       <Project>{B2A076C7-83AB-422B-A073-A1DDB8668A14}</Project>
       <Name>Appointmentv3.COMMON</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Appointmentv3.DAL\Appointmentv3.DAL.csproj">
+      <Project>{dd0b4f30-b292-491e-9ff9-0ecb1b0935b3}</Project>
+      <Name>Appointmentv3.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
