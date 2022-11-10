@@ -74,17 +74,57 @@ namespace Appointmentv3.BL
 
         public List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID)
         {
-            return this.repo.getCardDetailsByDoctorID(doctorID);
+            var appointmentByDocId =  this.repo.getCardDetailsByDoctorID(doctorID);
+            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
+            foreach (var ApptId in appointmentByDocId)
+            {
+                CardDetailsDTO CardDetail = new CardDetailsDTO();
+
+                CardDetail.DoctorID = ApptId.DoctorID;
+                CardDetail.PetID = ApptId.PetID;
+                CardDetail.AppointmentID = ApptId.AppointmentID;
+                CardDetail.AppointmentDate = ApptId.AppointmentDate;
+                CardDetail.AppointmentStatus = ApptId.AppointmentStatus;
+
+                CardDetails.Add(CardDetail);
+            }
+            return CardDetails;
         }
 
         public List<CardDetailsDTO> getCardDetailsByPetID(int petID)
         {
-            return this.repo.getCardDetailsByPetID(petID);
+            var appointmentByPetID =  this.repo.getCardDetailsByPetID(petID);
+            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
+            foreach (var ApptId in appointmentByPetID)
+            {
+                CardDetailsDTO cardDetails = new CardDetailsDTO();
+                cardDetails.DoctorID = ApptId.DoctorID;
+                cardDetails.PetID = ApptId.PetID;
+                cardDetails.AppointmentID = ApptId.AppointmentID;
+                cardDetails.AppointmentDate = ApptId.AppointmentDate;
+                cardDetails.AppointmentStatus = ApptId.AppointmentStatus;
+
+                CardDetails.Add(cardDetails);
+            }
+            return CardDetails;
         }
 
         public List<CardDetailsDTO> getCardDetailsForBooking(int doctorID, DateTime date)
         {
-            return this.repo.getCardDetailsForBooking(doctorID, date);
+            var appointmentbyDetailsForBooking =  this.repo.getCardDetailsForBooking(doctorID, date);
+            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
+            foreach (var ApptId in appointmentbyDetailsForBooking)
+            {
+                CardDetailsDTO cardDetails = new CardDetailsDTO();
+                cardDetails.DoctorID = ApptId.DoctorID;
+                cardDetails.PetID = ApptId.PetID;
+                cardDetails.AppointmentID = ApptId.AppointmentID;
+                cardDetails.AppointmentDate = ApptId.AppointmentDate;
+                cardDetails.AppointmentStatus = ApptId.AppointmentStatus;
+
+                CardDetails.Add(cardDetails);
+            }
+            return CardDetails;
         }
 
         public List<Clinic> getClinic()

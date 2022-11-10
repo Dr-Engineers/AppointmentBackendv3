@@ -20,6 +20,7 @@ namespace Appointmentv3.API.Controllers
         }
 
         [HttpGet]
+        [Route("api/Appointment/AppointmentID/{AppointmentId}")]
         public IHttpActionResult GetAppointmentDetails(int AppointmentId)
         {
             var appointmentData = repo.getAppointment(AppointmentId);
@@ -30,6 +31,7 @@ namespace Appointmentv3.API.Controllers
         }
 
         [HttpPost]
+        [Route("api/Appointment")]
         public IHttpActionResult PostAppointment(CreatingAppointmentDTO creatingAppointment)
         {
             if (!ModelState.IsValid)
@@ -40,6 +42,7 @@ namespace Appointmentv3.API.Controllers
         }
 
         [HttpPut]
+        [Route("api/Appointment/AppointmentID/{appointmentID}")]
         public IHttpActionResult editAppointment(int appointmentID, Appointment editedAppointment)
         {
             if (!ModelState.IsValid)
