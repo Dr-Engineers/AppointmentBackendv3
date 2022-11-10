@@ -1,7 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Appointmentv3.API.Controllers;
+using Appointmentv3.BL;
+using Appointmentv3.COMMON.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace UnitTestProject
 {
@@ -59,11 +68,54 @@ namespace UnitTestProject
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestGetAppointmentDetailsFound()
         {
-            //
-            // TODO: Add test logic here
-            //
+            //arrange
+            var appointment = new Appointment();
+            var mockBL = new Mock<IBusinessLayerAsync>();
+            mockBL.Setup(x => x.getAppointmentAsync(2)).ReturnsAsync(appointment);  
+            var controller = new AppointmentAsyncController(mockBL.Object);
+
+            //act
+            var mockResult = controller.GetAppointmentDetails(2);
+
+            //assert
+            Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
+
+
+        }
+
+        [TestMethod]
+        public void TestGetAppointmentDetailsThrowsException()
+        {
+            //arrange
+            Appointment appointment = null;
+            var mockBL = new Mock<IBusinessLayerAsync>();
+            mockBL.Setup(x => x.getAppointmentAsync(2)).ReturnsAsync(appointment);
+            var controller = new AppointmentAsyncController(mockBL.Object);
+
+            try
+            {
+                //act
+                var mockResult = controller.GetAppointmentDetails(2);
+            }
+
+            catch (HttpException ex)
+            {
+                // HttpException is expected
+                Assert.AreEqual(404, (int)ex.GetHttpCode());
+                //Assert.AreEqual("Not authorized.", ex.Message);
+            }
+            catch (Exception)
+            {
+                // Any other exception should cause the test to fail
+                Assert.Fail();
+            }
+
+            //assert
+            //Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
+
+
         }
     }
 }
