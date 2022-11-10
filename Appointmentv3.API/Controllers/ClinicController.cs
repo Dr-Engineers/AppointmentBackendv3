@@ -24,7 +24,7 @@ namespace Appointmentv3.API.Controllers
         public IHttpActionResult GET()
         {
             var clinics=bl.getClinic();
-            if (clinics == null)
+            if (clinics.Count == 0)
                 throw new HttpException(404, "Clinic data not available");
 
             return Ok(bl.getClinic());
