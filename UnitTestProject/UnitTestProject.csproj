@@ -69,6 +69,20 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Appointmentv3.API\Appointmentv3.API.csproj">
+      <Project>{d29bf472-8fad-408a-9c8e-cc7bed4522f1}</Project>
+      <Name>Appointmentv3.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Appointmentv3.BL\Appointmentv3.BL.csproj">
+      <Project>{58f19c17-2d0d-41eb-97b7-b37a61b62870}</Project>
+      <Name>Appointmentv3.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Appointmentv3.COMMON\Appointmentv3.COMMON.csproj">
+      <Project>{b2a076c7-83ab-422b-a073-a1ddb8668a14}</Project>
+      <Name>Appointmentv3.COMMON</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
