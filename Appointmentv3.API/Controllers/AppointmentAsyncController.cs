@@ -38,6 +38,8 @@ namespace Appointmentv3.API.Controllers
             if (!ModelState.IsValid)
                 throw new HttpException(400, "All fields not filled");
             Appointment appt = await repo.createAppointmentAsync(creatingAppointment);
+            if (appt == null)
+                throw new HttpException(404, "Appointment not created");
             return Created($"api/GetAppointmentDetails/{appt.AppointmentID}", appt);
 
         }
