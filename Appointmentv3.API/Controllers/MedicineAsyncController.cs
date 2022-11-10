@@ -18,7 +18,8 @@ namespace Appointmentv3.API.Controllers
         }
 
 
-
+        [HttpGet]
+        [Route("api/async/medicine")]
         public async Task<IHttpActionResult> GET()
         {
             var medicines =await bl.getMedicineAsync();

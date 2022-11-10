@@ -11,9 +11,9 @@ namespace Appointmentv3.DAL
 {
     public interface IAppointmentRepo
     {
-        List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID);
-        List<CardDetailsDTO> getCardDetailsByPetID(int petID);
-        List<CardDetailsDTO> getCardDetailsForBooking(int doctorID, DateTime date);
+        List<Appointment> getCardDetailsByDoctorID(int doctorID);
+        List<Appointment> getCardDetailsByPetID(int petID);
+        List<Appointment> getCardDetailsForBooking(int doctorID, DateTime date);
         List<Test> getTests();
         List<Clinic> getClinic();
         List<Symptom> getSymptom();

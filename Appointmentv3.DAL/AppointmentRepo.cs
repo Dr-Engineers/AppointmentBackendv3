@@ -12,10 +12,6 @@ namespace Appointmentv3.DAL
     public class AppointmentRepo : IAppointmentRepo
     {
         AppointmentDbContext db = new AppointmentDbContext();
-        public AppointmentRepo(AppointmentDbContext db)
-        {
-            this.db = db;
-        }
 
 
         public Appointment createAppointment(Appointment creatingAppointment)
@@ -52,68 +48,30 @@ namespace Appointmentv3.DAL
             return appointmentById;
         }
 
-        public List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID)
+        public List<Appointment> getCardDetailsByDoctorID(int doctorID)
         {
             var appointmentByDocId = db.Appointments.Where(appt => appt.DoctorID == doctorID).ToList();
 
             if (appointmentByDocId == null)
                 return null;
+            return appointmentByDocId;        
 
-            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
-            foreach (var ApptId in appointmentByDocId)
-            {
-                CardDetailsDTO CardDetail = new CardDetailsDTO();
-
-                CardDetail.DoctorID = ApptId.DoctorID;
-                CardDetail.PetID = ApptId.PetID;
-                CardDetail.AppointmentID = ApptId.AppointmentID;
-                CardDetail.AppointmentDate = ApptId.AppointmentDate;
-                CardDetail.AppointmentStatus = ApptId.AppointmentStatus;
-
-                CardDetails.Add(CardDetail);
-            }
-
-            return CardDetails;
         }
 
-        public List<CardDetailsDTO> getCardDetailsByPetID(int petID)
+        public List<Appointment> getCardDetailsByPetID(int petID)
         {
-            var appointmentByPetID = db.Appointments.Where(appt => appt.PetID == petID);
+            var appointmentByPetID = db.Appointments.Where(appt => appt.PetID == petID).ToList();
             if (appointmentByPetID == null)
                 return null;
-            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
-            foreach(var ApptId in appointmentByPetID)
-            {
-                CardDetailsDTO cardDetails = new CardDetailsDTO();
-                cardDetails.DoctorID = ApptId.DoctorID;
-                cardDetails.PetID = ApptId.PetID;
-                cardDetails.AppointmentID = ApptId.AppointmentID;
-                cardDetails.AppointmentDate = ApptId.AppointmentDate;
-                cardDetails.AppointmentStatus = ApptId.AppointmentStatus;
-
-                CardDetails.Add(cardDetails);
-            }
-            return CardDetails;
+            return appointmentByPetID;
         }
 
-        public List<CardDetailsDTO> getCardDetailsForBooking(int doctorID, DateTime date)
+        public List<Appointment> getCardDetailsForBooking(int doctorID, DateTime date)
         {
-            var appointmentByPetID = db.Appointments.Where(appt => appt.DoctorID == doctorID && appt.AppointmentDate == date);
+            var appointmentByPetID = db.Appointments.Where(appt => appt.DoctorID == doctorID && appt.AppointmentDate == date).ToList();
             if (appointmentByPetID == null)
                 return null;
-            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
-            foreach (var ApptId in appointmentByPetID)
-            {
-                CardDetailsDTO cardDetails = new CardDetailsDTO();
-                cardDetails.DoctorID = ApptId.DoctorID;
-                cardDetails.PetID = ApptId.PetID;
-                cardDetails.AppointmentID = ApptId.AppointmentID;
-                cardDetails.AppointmentDate = ApptId.AppointmentDate;
-                cardDetails.AppointmentStatus = ApptId.AppointmentStatus;
-
-                CardDetails.Add(cardDetails);
-            }
-            return CardDetails;
+            return appointmentByPetID;
         }
 
         public List<Clinic> getClinic()
@@ -133,7 +91,7 @@ namespace Appointmentv3.DAL
 
         public PetIssue GetPetIssueById(int id)
         {
-            throw new NotImplementedException();
+            return db.PetIssues.Where(issue => issue.PetIssueID == id).FirstOrDefault();
         }
 
         public List<Symptom> getSymptom()

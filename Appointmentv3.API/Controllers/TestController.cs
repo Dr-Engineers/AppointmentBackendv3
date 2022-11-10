@@ -17,7 +17,6 @@ namespace Appointmentv3.API.Controllers
             this.bl = bl;
         }
 
-
         [HttpGet]
         [Route("api/Tests")]
         public IHttpActionResult GetTests()

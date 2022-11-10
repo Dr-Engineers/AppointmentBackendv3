@@ -18,7 +18,8 @@ namespace Appointmentv3.API.Controllers
         }
 
 
-
+        [HttpGet]
+        [Route("api/symptom")]
         public IHttpActionResult GET()
         {
             return Ok(bl.getSymptom());
