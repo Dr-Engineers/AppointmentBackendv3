@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Appointmentv3.API.Controllers
@@ -16,9 +17,10 @@ namespace Appointmentv3.API.Controllers
             this.bl = bl;
         }
 
-        public IHttpActionResult GET()
+        public async Task<IHttpActionResult> GET()
         {
-            return Ok(bl.getPetIssueAsync());
+            var petIssues = await bl.getPetIssueAsync();
+            return Ok(petIssues);
         }
     }
 }

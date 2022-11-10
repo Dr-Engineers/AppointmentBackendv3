@@ -41,6 +41,7 @@ namespace Appointmentv3.API.Controllers
 
         }
 
+        [HttpPut]
         public IHttpActionResult editAppointment(int appointmentID, Appointment editedAppointment)
         {
             if (!ModelState.IsValid)
@@ -48,11 +49,5 @@ namespace Appointmentv3.API.Controllers
             repo.editAppointment(appointmentID, editedAppointment);
             return Ok();
         }
-
-
-
-
-
-
     }
 }
