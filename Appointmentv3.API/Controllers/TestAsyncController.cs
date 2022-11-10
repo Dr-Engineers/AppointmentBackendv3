@@ -22,7 +22,7 @@ namespace Appointmentv3.API.Controllers
         public async Task<IHttpActionResult> GET()
         {
             var tests = await bl.getTestsAsync();
-            if (tests.Count == 0)
+            if (tests.Count() == 0)
                 throw new HttpException(404, "Test data not found");
             return Ok(tests);
         }
