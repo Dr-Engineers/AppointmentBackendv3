@@ -28,7 +28,7 @@ namespace Appointmentv3.BL
             foreach (var time in TimeTable)
             {
                 if (time.AppointmentDate == creatingAppointment.AppoitmentDate)
-                    return null;
+                    throw new CannotBookAppointment("Your Pet already has an appointment at this selected time slot");
             }
 
             Appointment appointment = new Appointment();

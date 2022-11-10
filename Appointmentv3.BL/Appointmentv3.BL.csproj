@@ -121,6 +121,7 @@
   <ItemGroup>
     <Compile Include="BusinessLayer.cs" />
     <Compile Include="BusinessLayerAsync.cs" />
+    <Compile Include="CannotBookAppointment.cs" />
     <Compile Include="IBusinessLayer.cs" />
     <Compile Include="IBusinessLayerAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
