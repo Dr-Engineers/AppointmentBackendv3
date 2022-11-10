@@ -1,7 +1,11 @@
 ﻿using Appointmentv3.BL;
+using Appointmentv3.COMMON.DTO;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
+using System.Web.Http.OData;
 
 namespace Appointmentv3.API.Controllers
 {
@@ -14,40 +18,45 @@ namespace Appointmentv3.API.Controllers
             this.bl = bl;
         }
 
+        [EnableQuery]
         [HttpGet]
         [Route("api/async/forDoctor/{doctorID}")]
-        public async Task<IHttpActionResult> getCardDetailsByDoctorID(int doctorID)
+        
+        public async Task<IQueryable<CardDetailsDTO>> getCardDetailsByDoctorID(int doctorID)
         {
             var doct = await bl.getCardDetailsByDoctorIDAsync(doctorID);
-            if (doct == null)
+            if (doct.Count == 0)
             {
-                return NotFound();
+                throw new HttpException(404, "No Appointments");
             }
-            return Ok(doct);
+            return doct.AsQueryable();
         }
 
+
+        [EnableQuery]
         [HttpGet]
         [Route("api/async/forPet/{petID}")]
-        public async  Task<IHttpActionResult> getCardDetailsByPetID(int petID)
+        public async  Task<IQueryable<CardDetailsDTO>> getCardDetailsByPetID(int petID)
         {
             var pet = await bl.getCardDetailsByPetIDAsync(petID);
-            if (pet == null)
+            if (pet.Count == 0)
             {
-                return NotFound();
+                throw new HttpException(404, "No Appointments");
             }
-            return Ok(pet);
+            return pet.AsQueryable();
         }
 
+        [EnableQuery]
         [HttpGet]
         [Route("api/async/forBooking/doctorID/{doctorID}/date/{date}")]
-        public async Task<IHttpActionResult> getCardDetailsForBooking(int doctorID, DateTime date)
+        public async Task<IQueryable<CardDetailsDTO>> getCardDetailsForBooking(int doctorID, DateTime date)
         {
             var booking = await bl.getCardDetailsForBookingAsync(doctorID, date);
-            if (booking == null)
+            if (booking.Count == 0)
             {
-                return NotFound();
+                throw new HttpException(404, "No Appointments");
             }
-            return Ok(booking);
+            return booking.AsQueryable();
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Appointmentv3.BL;
+using System.Web;
 
 namespace Appointmentv3.API.Controllers
 {
@@ -22,6 +23,9 @@ namespace Appointmentv3.API.Controllers
         [Route("api/symptom")]
         public IHttpActionResult GET()
         {
+            var symptoms = bl.getSymptom();
+            if (symptoms.Count == 0)
+                throw new HttpException(404, "symptoms data not available");
             return Ok(bl.getSymptom());
         }
     }

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Appointmentv3.BL;
+using System.Web;
 
 namespace Appointmentv3.API.Controllers
 {
@@ -22,6 +23,10 @@ namespace Appointmentv3.API.Controllers
         [Route("api/clinic")]
         public IHttpActionResult GET()
         {
+            var clinics=bl.getClinic();
+            if (clinics.Count == 0)
+                throw new HttpException(404, "Clinic data not available");
+
             return Ok(bl.getClinic());
         }
     }

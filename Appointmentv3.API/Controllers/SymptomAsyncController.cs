@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace Appointmentv3.API.Controllers
@@ -22,6 +23,8 @@ namespace Appointmentv3.API.Controllers
         public async Task<IHttpActionResult> GET()
         {
             var symptoms = await bl.getSymptomAsync();
+            if (symptoms.Count == 0)
+                throw new HttpException(404, "symptoms data not available");
             return Ok(symptoms);
         }
     }
