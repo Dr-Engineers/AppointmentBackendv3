@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Appointmentv3.BL;
+using System.Web;
 
 namespace Appointmentv3.API.Controllers
 {
@@ -19,8 +20,11 @@ namespace Appointmentv3.API.Controllers
 
         [HttpGet]
         [Route("api/Tests")]
-        public IHttpActionResult GetTests()
+        public IHttpActionResult GET()
         {
+            var tests = bl.getTests();
+            if (tests.Count == 0)
+                throw new HttpException(404, "Tests data not available");
             return Ok(bl.getTests());
         }
     }
