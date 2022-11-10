@@ -10,5 +10,11 @@ namespace UnitTestProject
         public void TestMethod1()
         {
         }
+
+
+        [TestMethod]
+        public void TestAppointmentsNotFoundWithDoctorID()
+        {
+        }
     }
 }
