@@ -13,19 +13,38 @@ namespace Appointmentv3.DAL
     public class AppointmentRepoAsync : IAppointmentRepoAsync
     {
         AppointmentDbContext db = new AppointmentDbContext();
-        public Task<Appointment> createAppointmentAsync(Appointment creatingAppointment)
+        public async Task<Appointment> createAppointmentAsync(Appointment creatingAppointment)
         {
-            throw new NotImplementedException();
+            db.Appointments.Add(creatingAppointment);
+            await db.SaveChangesAsync();
+            return creatingAppointment;
         }
 
-        public Task<Appointment> editAppointmentAsync(int appointmentID, Appointment editedAppointment)
+        public async Task<Appointment> editAppointmentAsync(int appointmentID, Appointment editedAppointment)
         {
-            throw new NotImplementedException();
+            var appt = await db.Appointments.FindAsync(appointmentID);
+
+            if (appt == null)
+                return null;
+
+            appt = editedAppointment;
+
+            db.Entry(appt).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.ObservedPetIssueID).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.Prescription).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.DiagnosedSymptomID).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.PrescribedTestID).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt.RecommendationID).State = System.Data.Entity.EntityState.Modified;
+            await db.SaveChangesAsync();
+            return editedAppointment;
         }
 
-        public Task<Appointment> getAppointmentAsync(int appointmentID)
+        public async Task<Appointment> getAppointmentAsync(int appointmentID)
         {
-            throw new NotImplementedException();
+            var appointmentById = await db.Appointments.FindAsync(appointmentID);
+            if (appointmentById == null)
+                return null;
+            return appointmentById;
         }
 
         public async Task<List<Appointment>> getCardDetailsByDoctorIDAsync(int doctorID)
@@ -72,9 +91,9 @@ namespace Appointmentv3.DAL
             return petIssues;
         }
 
-        public PetIssue GetPetIssueByIdAsync(int id)
+        public async Task<PetIssue> GetPetIssueByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await db.PetIssues.Where(issue => issue.PetIssueID == id).FirstOrDefaultAsync();
         }
 
         public async Task<List<Symptom>> getSymptomAsync()

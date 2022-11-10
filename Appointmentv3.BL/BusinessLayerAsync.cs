@@ -18,19 +18,57 @@ namespace Appointmentv3.BL
             this.repo = repo;
         }
 
-        public Task<Appointment> createAppointmentAsync(CreatingAppointmentDTO creatingAppointment)
+        public async Task<Appointment> createAppointmentAsync(CreatingAppointmentDTO creatingAppointment)
         {
-            throw new NotImplementedException();
+            if (creatingAppointment == null)
+                return null;
+
+            Appointment appointment = new Appointment();
+            appointment.PetID = creatingAppointment.PetID;
+            appointment.DoctorID = creatingAppointment.DoctorID;
+            appointment.AppointmentDate = creatingAppointment.AppoitmentDate;
+            appointment.Reason = creatingAppointment.Reason;
+            foreach (var id in creatingAppointment.PetIssues)
+            {
+                PetIssue petIssue = await this.repo.GetPetIssueByIdAsync(id);
+                ObservedPetIssue observedPetIssue = new ObservedPetIssue { PetIssue = petIssue };
+                appointment.ObservedPetIssueID.Add(observedPetIssue);
+            }
+            // Default values For the appointment
+            appointment.AppointmentStatus = Status.Confirmed;
+            appointment.RecommendationID = new List<Recommendation>();
+            appointment.PrescribedTestID = new List<PrescribedTest>();
+            appointment.Prescription = new List<PrescribedMedicine>();
+            appointment.DiagnosedSymptomID = new List<DiagnosedSymptom>();
+            appointment.VitalID = new Vital();
+
+            var newAppointment = await this.repo.createAppointmentAsync(appointment);
+
+            //var petClient = new RestClient();
+            //var doctorClient = new RestClient();
+
+            //var petRequest = new RestRequest("api/petId/{petId}/appId/{appId}", Method.Put);
+            //petRequest.AddUrlSegment("petId", newAppointment.PetID);            
+            //petRequest.AddJsonBody(new { appointmentIdByAppointmentModule = newAppointment.AppointmentID });
+
+            //var doctorRequest = new RestRequest("api/Doctors/AssignAppointmentToDoctor/{doctorId}", Method.Put);
+            //doctorRequest.AddUrlSegment("doctorId", newAppointment.DoctorID);
+            //doctorRequest.AddJsonBody(new { appointmentIdByAppointmentModule = newAppointment.AppointmentID });
+
+            //petClient.Execute(petRequest);
+            //doctorClient.Execute(doctorRequest);
+
+            return newAppointment;
         }
 
-        public Task<Appointment> editAppointmentAsync(int appointmentID, Appointment editedAppointment)
+        public async Task<Appointment> editAppointmentAsync(int appointmentID, Appointment editedAppointment)
         {
-            throw new NotImplementedException();
+            return await this.repo.editAppointmentAsync(appointmentID, editedAppointment);
         }
 
-        public Task<Appointment> getAppointmentAsync(int appointmentID)
+        public async Task<Appointment> getAppointmentAsync(int appointmentID)
         {
-            throw new NotImplementedException();
+            return await this.repo.getAppointmentAsync(appointmentID);
         }
 
         public async Task<List<CardDetailsDTO>> getCardDetailsByDoctorIDAsync(int doctorID)

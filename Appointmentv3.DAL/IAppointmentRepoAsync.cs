@@ -18,7 +18,7 @@ namespace Appointmentv3.DAL
         Task<List<Clinic>> getClinicAsync();
         Task<List<Symptom>> getSymptomAsync();
         Task<List<PetIssue>> getPetIssueAsync();
-        PetIssue GetPetIssueByIdAsync(int id);
+        Task<PetIssue> GetPetIssueByIdAsync(int id);
         Task<List<Medicine>> getMedicineAsync();
         Task<Appointment> getAppointmentAsync(int appointmentID);
         Task<Appointment> editAppointmentAsync(int appointmentID, Appointment editedAppointment);
