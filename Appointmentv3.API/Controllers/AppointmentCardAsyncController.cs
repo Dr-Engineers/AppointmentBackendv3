@@ -19,7 +19,7 @@ namespace Appointmentv3.API.Controllers
         public async Task<IHttpActionResult> getCardDetailsByDoctorID(int doctorID)
         {
             var doct = await bl.getCardDetailsByDoctorIDAsync(doctorID);
-            if (doct == null)
+            if (doct.Count == 0)
             {
                 return NotFound();
             }
@@ -31,7 +31,7 @@ namespace Appointmentv3.API.Controllers
         public async  Task<IHttpActionResult> getCardDetailsByPetID(int petID)
         {
             var pet = await bl.getCardDetailsByPetIDAsync(petID);
-            if (pet == null)
+            if (pet.Count == 0)
             {
                 return NotFound();
             }
@@ -43,7 +43,7 @@ namespace Appointmentv3.API.Controllers
         public async Task<IHttpActionResult> getCardDetailsForBooking(int doctorID, DateTime date)
         {
             var booking = await bl.getCardDetailsForBookingAsync(doctorID, date);
-            if (booking == null)
+            if (booking.Count == 0)
             {
                 return NotFound();
             }
