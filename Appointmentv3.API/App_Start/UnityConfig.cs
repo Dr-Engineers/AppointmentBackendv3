@@ -46,6 +46,8 @@ namespace Appointmentv3.API
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IBusinessLayer, BusinessLayer>();
             container.RegisterType<IAppointmentRepo, AppointmentRepo>();
+            container.RegisterType<IBusinessLayerAsync, BusinessLayerAsync>();
+            container.RegisterType<IAppointmentRepoAsync, AppointmentRepoAsync>();
         }
     }
 }
