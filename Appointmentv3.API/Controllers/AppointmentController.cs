@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace Appointmentv3.API.Controllers
@@ -20,6 +21,7 @@ namespace Appointmentv3.API.Controllers
         }
 
         [HttpGet]
+        [Route("api/Appointment/{AppointmentId}")]
         public IHttpActionResult GetAppointmentDetails(int AppointmentId)
         {
             var appointmentData = repo.getAppointment(AppointmentId);

@@ -17,6 +17,7 @@ namespace Appointmentv3.DAL
             this.db = db;
         }
 
+
         public Appointment createAppointment(Appointment creatingAppointment)
         {
             db.Appointments.Add(creatingAppointment);
