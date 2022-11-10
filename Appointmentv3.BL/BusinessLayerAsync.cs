@@ -33,19 +33,59 @@ namespace Appointmentv3.BL
             throw new NotImplementedException();
         }
 
-        public Task<List<CardDetailsDTO>> getCardDetailsByDoctorIDAsync(int doctorID)
+        public async Task<List<CardDetailsDTO>> getCardDetailsByDoctorIDAsync(int doctorID)
         {
-            throw new NotImplementedException();
+            var appointmentsByDocId = await this.repo.getCardDetailsByDoctorIDAsync(doctorID);
+            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
+            foreach (var ApptId in appointmentsByDocId)
+            {
+                CardDetailsDTO CardDetail = new CardDetailsDTO();
+
+                CardDetail.DoctorID = ApptId.DoctorID;
+                CardDetail.PetID = ApptId.PetID;
+                CardDetail.AppointmentID = ApptId.AppointmentID;
+                CardDetail.AppointmentDate = ApptId.AppointmentDate;
+                CardDetail.AppointmentStatus = ApptId.AppointmentStatus;
+
+                CardDetails.Add(CardDetail);
+            }
+            return CardDetails;
         }
 
-        public Task<List<CardDetailsDTO>> getCardDetailsByPetIDAsync(int petID)
+        public async Task<List<CardDetailsDTO>> getCardDetailsByPetIDAsync(int petID)
         {
-            throw new NotImplementedException();
+            var appointmentsByPetID = await this.repo.getCardDetailsByPetIDAsync(petID);
+            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
+            foreach (var ApptId in appointmentsByPetID)
+            {
+                CardDetailsDTO cardDetails = new CardDetailsDTO();
+                cardDetails.DoctorID = ApptId.DoctorID;
+                cardDetails.PetID = ApptId.PetID;
+                cardDetails.AppointmentID = ApptId.AppointmentID;
+                cardDetails.AppointmentDate = ApptId.AppointmentDate;
+                cardDetails.AppointmentStatus = ApptId.AppointmentStatus;
+
+                CardDetails.Add(cardDetails);
+            }
+            return CardDetails;
         }
 
-        public Task<List<CardDetailsDTO>> getCardDetailsForBookingAsync(int doctorID, DateTime date)
+        public async Task<List<CardDetailsDTO>> getCardDetailsForBookingAsync(int doctorID, DateTime date)
         {
-            throw new NotImplementedException();
+            var appointmentsByDocAndDate = await this.repo.getCardDetailsForBookingAsync(doctorID, date);
+            List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
+            foreach (var ApptId in appointmentsByDocAndDate)
+            {
+                CardDetailsDTO cardDetails = new CardDetailsDTO();
+                cardDetails.DoctorID = ApptId.DoctorID;
+                cardDetails.PetID = ApptId.PetID;
+                cardDetails.AppointmentID = ApptId.AppointmentID;
+                cardDetails.AppointmentDate = ApptId.AppointmentDate;
+                cardDetails.AppointmentStatus = ApptId.AppointmentStatus;
+
+                CardDetails.Add(cardDetails);
+            }
+            return CardDetails;
         }
 
         public async Task<List<Clinic>> getClinicAsync()

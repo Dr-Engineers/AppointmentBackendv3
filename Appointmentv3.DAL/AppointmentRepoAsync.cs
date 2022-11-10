@@ -28,19 +28,29 @@ namespace Appointmentv3.DAL
             throw new NotImplementedException();
         }
 
-        public Task<List<Appointment>> getCardDetailsByDoctorIDAsync(int doctorID)
+        public async Task<List<Appointment>> getCardDetailsByDoctorIDAsync(int doctorID)
         {
-            throw new NotImplementedException();
+            var appointmentsByDocId = await (db.Appointments.Where(appt => appt.DoctorID == doctorID)).ToListAsync();
+            if (appointmentsByDocId == null)
+                return null;
+            return appointmentsByDocId;   
+
         }
 
-        public Task<List<Appointment>> getCardDetailsByPetIDAsync(int petID)
+        public async Task<List<Appointment>> getCardDetailsByPetIDAsync(int petID)
         {
-            throw new NotImplementedException();
+            var appointmentsByPetID = await (db.Appointments.Where(appt => appt.PetID == petID)).ToListAsync();
+            if (appointmentsByPetID == null)
+                return null;
+            return appointmentsByPetID;
         }
 
-        public Task<List<Appointment>> getCardDetailsForBookingAsync(int doctorID, DateTime date)
+            public async Task<List<Appointment>> getCardDetailsForBookingAsync(int doctorID, DateTime date)
         {
-            throw new NotImplementedException();
+            var appointmentsByDocAndDate = await (db.Appointments.Where(appt => appt.DoctorID == doctorID && appt.AppointmentDate == date)).ToListAsync();
+            if (appointmentsByDocAndDate == null)
+                return null;
+            return appointmentsByDocAndDate;
         }
 
         public async Task<List<Clinic>> getClinicAsync()
