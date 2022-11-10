@@ -158,7 +158,7 @@ namespace Appointmentv3.BL
 
         public List<Test> getTests()
         {
-            return repo.getTests();
+            return this.repo.getTests();
         }
     }
 }
