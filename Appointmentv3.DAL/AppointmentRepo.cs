@@ -13,6 +13,7 @@ namespace Appointmentv3.DAL
     {
         AppointmentDbContext db = new AppointmentDbContext();
 
+
         public Appointment createAppointment(Appointment creatingAppointment)
         {
             db.Appointments.Add(creatingAppointment);

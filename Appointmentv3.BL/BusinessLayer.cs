@@ -24,6 +24,13 @@ namespace Appointmentv3.BL
             if (creatingAppointment == null)
                 return null;
 
+            var TimeTable = this.repo.getCardDetailsByPetID(creatingAppointment.PetID);
+            foreach (var time in TimeTable)
+            {
+                if (time.AppointmentDate == creatingAppointment.AppoitmentDate)
+                    return null;
+            }
+
             Appointment appointment = new Appointment();
             appointment.PetID = creatingAppointment.PetID;
             appointment.DoctorID = creatingAppointment.DoctorID;
@@ -59,6 +66,8 @@ namespace Appointmentv3.BL
             //petClient.Execute(petRequest);
             //doctorClient.Execute(doctorRequest);
 
+
+
             return newAppointment;
         }
 
@@ -69,7 +78,10 @@ namespace Appointmentv3.BL
 
         public Appointment getAppointment(int appointmentID)
         {
-            return this.repo.getAppointment(appointmentID);
+            var res = this.repo.getAppointment(appointmentID);
+            if (res == null)
+                return null;
+            return res;
         }
 
         public List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID)
@@ -149,7 +161,7 @@ namespace Appointmentv3.BL
 
         public List<Test> getTests()
         {
-            return this.repo.getTests();
+            return repo.getTests();
         }
     }
 }

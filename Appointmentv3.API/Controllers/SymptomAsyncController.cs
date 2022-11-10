@@ -17,6 +17,8 @@ namespace Appointmentv3.API.Controllers
             this.bl = bl;
         }
 
+        [HttpGet]
+        [Route("api/async/symptom")]
         public async Task<IHttpActionResult> GET()
         {
             var symptoms = await bl.getSymptomAsync();
