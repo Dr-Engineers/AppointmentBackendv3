@@ -28,5 +28,12 @@ namespace Appointmentv3.API.Controllers
                 throw new HttpException(404, "symptoms data not available");
             return Ok(bl.getSymptom());
         }
+        [HttpPost]
+        [Route("api/symptom/{symptomName}")]
+        public IHttpActionResult POST(string symptomName)
+        {
+            bl.CreateSymptom(symptomName);
+            return Ok();
+        }
     }
 }

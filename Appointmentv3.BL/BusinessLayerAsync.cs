@@ -72,6 +72,31 @@ namespace Appointmentv3.BL
             return newAppointment;
         }
 
+        public async Task CreateClinicAsync(string clinicName)
+        {
+            await this.repo.CreateClinicAsync(clinicName);
+        }
+
+        public async Task CreateMedicineAsync(string medicineTest)
+        {
+            await this.repo.CreateMedicineAsync(medicineTest);
+        }
+
+        public async Task CreatePetIssueAsync(string petIssue)
+        {
+            await this.repo.CreatePetIssueAsync(petIssue);
+        }
+
+        public async Task CreateSymptomAsync(string symptomName)
+        {
+            await this.repo.CreatesymptomAsync(symptomName);
+        }
+
+        public async Task CreateTestAsync(string testName)
+        {
+            await this.CreateTestAsync(testName);
+        }
+
         public async Task<Appointment> editAppointmentAsync(int appointmentID, Appointment editedAppointment)
         {
             return await this.repo.editAppointmentAsync(appointmentID, editedAppointment);

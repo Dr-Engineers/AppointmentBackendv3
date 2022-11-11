@@ -71,6 +71,31 @@ namespace Appointmentv3.BL
             return newAppointment;
         }
 
+        public void CreateClinc(string clinicName)
+        {
+            this.repo.CreateClinic(clinicName);
+        }
+
+        public void CreateMedicine(string medicineName)
+        {
+            this.repo.CreateMedicine(medicineName);
+        }
+
+        public void CreatePetIssue(string petIssueName)
+        {
+            this.repo.CreatePetIssue(petIssueName);
+        }
+
+        public void CreateSymptom(string symptomName)
+        {
+            this.repo.CreateSymptom(symptomName);
+        }
+
+        public void CreateTest(string testName)
+        {
+            this.repo.CreateTest(testName);
+        }
+
         public Appointment editAppointment(int appointmentID, Appointment editedAppointment)
         {
             return this.repo.editAppointment(appointmentID, editedAppointment);

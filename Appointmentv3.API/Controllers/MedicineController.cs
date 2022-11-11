@@ -28,5 +28,12 @@ namespace Appointmentv3.API.Controllers
                 throw new HttpException(404, "Medicine data not available");
             return Ok(bl.getMedicine());
         }
+        [HttpPost]
+        [Route("api/medicine/{medicineName}")]
+        public IHttpActionResult POST(string medicineName)
+        {
+            bl.CreateMedicine(medicineName);
+            return Ok();
+        }
     }
 }

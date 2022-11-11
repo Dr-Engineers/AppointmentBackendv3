@@ -15,10 +15,15 @@ namespace Appointmentv3.BL
         Task<List<CardDetailsDTO>> getCardDetailsByPetIDAsync(int petID);
         Task<List<CardDetailsDTO>> getCardDetailsForBookingAsync(int doctorID, DateTime date);
         Task<List<Test>> getTestsAsync();
+        Task CreateTestAsync(string testName);
         Task<List<Clinic>> getClinicAsync();
+        Task CreateClinicAsync(string clinicName);
         Task<List<Symptom>> getSymptomAsync();
+        Task CreateSymptomAsync(string symptomName);
         Task<List<PetIssue>> getPetIssueAsync();
+        Task CreatePetIssueAsync(string petIssue);
         Task<List<Medicine>> getMedicineAsync();
+        Task CreateMedicineAsync(string medicineTest);
         Task<Appointment> getAppointmentAsync(int appointmentID);
         Task<Appointment> editAppointmentAsync(int appointmentID, Appointment editedAppointment);
         Task<Appointment> createAppointmentAsync(CreatingAppointmentDTO creatingAppointment);

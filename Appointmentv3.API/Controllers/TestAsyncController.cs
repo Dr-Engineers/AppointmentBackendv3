@@ -26,5 +26,12 @@ namespace Appointmentv3.API.Controllers
                 throw new HttpException(404, "Tests data not found");
             return Ok(tests);
         }
+        [HttpPost]
+        [Route("api/async/Tests/{testName}")]
+        public async Task<IHttpActionResult> POST(string testName)
+        {
+            await bl.CreateTestAsync(testName);
+            return Ok();
+        }
     }
 }

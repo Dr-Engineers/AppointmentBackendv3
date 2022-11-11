@@ -28,5 +28,12 @@ namespace Appointmentv3.API.Controllers
                 throw new HttpException(404, "Medicine data not available");
             return Ok(medicines);
         }
+        [HttpPost]
+        [Route("api/async/medicine/{medicineName}")]
+        public async Task<IHttpActionResult> POST(string medicineName)
+        {
+            await bl.CreateMedicineAsync(medicineName);
+            return Ok();
+        }
     }
 }
