@@ -89,12 +89,12 @@ namespace Appointmentv3.BL
 
         public async Task CreateSymptomAsync(string symptomName)
         {
-            await this.repo.CreatesymptomAsync(symptomName);
+            await this.repo.CreateSymptomAsync(symptomName);
         }
 
         public async Task CreateTestAsync(string testName)
         {
-            await this.CreateTestAsync(testName);
+            await this.repo.CreateTestsAsync(testName);
         }
 
         public async Task<Appointment> editAppointmentAsync(int appointmentID, Appointment editedAppointment)

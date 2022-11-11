@@ -43,7 +43,7 @@ namespace Appointmentv3.DAL
             await db.SaveChangesAsync();
         }
 
-        public async Task CreateTestAsync(string testName)
+        public async Task CreateTestsAsync(string testName)
         {
             db.Tests.Add(new Test() { TestName = testName });
             await db.SaveChangesAsync();

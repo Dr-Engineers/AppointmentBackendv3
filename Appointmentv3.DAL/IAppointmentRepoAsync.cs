@@ -19,7 +19,7 @@ namespace Appointmentv3.DAL
         Task<List<Clinic>> getClinicAsync();
         Task CreateClinicAsync(string clinicName);
         Task<List<Symptom>> getSymptomAsync();
-        Task CreatesymptomAsync(string symptomName);
+        Task CreateSymptomAsync(string symptomName);
         Task<List<PetIssue>> getPetIssueAsync();
         Task CreatePetIssueAsync(string petIssueName);
         Task<List<Medicine>> getMedicineAsync();
