@@ -149,6 +149,8 @@ namespace UnitTestProject
 
 
             IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getClinicAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<Clinic>));
             var actual = await bl.editAppointmentAsync(1, EditedAppointment);
             Assert.IsInstanceOfType(actual, typeof(Appointment));
         }
@@ -176,6 +178,17 @@ namespace UnitTestProject
         {
             var mock = new Mock<IAppointmentRepoAsync>();
 
+        }
+
+        [TestMethod]
+        public async Task TestGetMedicines()
+        {
+            var mock = new Mock<IAppointmentRepoAsync>();
+            mock.Setup(x => x.getMedicineAsync()).ReturnsAsync(new List<Medicine>()
+            {   new Medicine()
+                {
+                    MedicineID = 1,
+                    MedicineName = "MedicineName1"
             List<CardDetailsDTO> list = new List<CardDetailsDTO>()
             { new CardDetailsDTO()
                 {
@@ -185,20 +198,47 @@ namespace UnitTestProject
                 AppointmentDate =  Convert.ToDateTime("11/11/2022"),
                 AppointmentStatus = Status.Confirmed
                 },
+                new Medicine()
             new CardDetailsDTO()
                 {
+                    MedicineID = 2,
+                    MedicineName = "MedicineName2"
                 AppointmentID = 3,
                 PetID = 1,
                 DoctorID = 2,
                 AppointmentDate =  Convert.ToDateTime("10/11/2022") ,
                 AppointmentStatus = Status.Closed
                 }
+            });
+            IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getMedicineAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<Medicine>));
+        }
             };
             int docId = 2;
             mock.Setup(x => x.getCardDetailsByDoctorIDAsync(1)).ReturnsAsync(new List<Appointment>());
             //mock.Setup(x => x.getCardDetailsByDoctorIDAsync(docId)).ReturnsAsync(list);
 
 
+        [TestMethod]
+        public async Task TestGetPetIssues()
+        {
+            var mock = new Mock<IAppointmentRepoAsync>();
+            mock.Setup(x => x.getPetIssueAsync()).ReturnsAsync(new List<PetIssue>()
+            {   new PetIssue()
+                {
+                    PetIssueID = 1,
+                    PetIssueName = "PetIssueName1"
+                },
+                new PetIssue()
+                {
+                    PetIssueID = 2,
+                    PetIssueName = "PetIssueName2"
+                }
+            });
+            IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getPetIssueAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<PetIssue>));
             IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
             var actual = bl.getCardDetailsByDoctorIDAsync(2);
             Assert.IsInstanceOfType(actual, typeof(List<CardDetailsDTO>));
@@ -220,6 +260,25 @@ namespace UnitTestProject
 
 
         [TestMethod]
+        public async Task TestGetTests()
+        {
+            var mock = new Mock<IAppointmentRepoAsync>();
+            mock.Setup(x => x.getTestsAsync()).ReturnsAsync(new List<Test>()
+            {   new Test()
+                {
+                    TestID = 1,
+                    TestName = "TestName1"
+                },
+                new Test()
+                {
+                    TestID = 2,
+                    TestName = "TestName2"
+                }
+            });
+            IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getTestsAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<Test>));
+        }       
         public async Task TestAppointmentAlreadySchedule()
         {
             //Appointmentv3.COMMON.Entities.Appointment Actual = new Appointmentv3.COMMON.Entities.Appointment();
