@@ -87,6 +87,10 @@ namespace Appointmentv3.BL
         public List<CardDetailsDTO> getCardDetailsByDoctorID(int doctorID)
         {
             var appointmentByDocId =  this.repo.getCardDetailsByDoctorID(doctorID);
+            
+            if (appointmentByDocId.Count == 0)
+                return null;
+            
             List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
             foreach (var ApptId in appointmentByDocId)
             {
@@ -106,6 +110,10 @@ namespace Appointmentv3.BL
         public List<CardDetailsDTO> getCardDetailsByPetID(int petID)
         {
             var appointmentByPetID =  this.repo.getCardDetailsByPetID(petID);
+            
+            if(appointmentByPetID.Count == 0)
+                return null;
+            
             List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
             foreach (var ApptId in appointmentByPetID)
             {
@@ -124,6 +132,10 @@ namespace Appointmentv3.BL
         public List<CardDetailsDTO> getCardDetailsForBooking(int doctorID, DateTime date)
         {
             var appointmentbyDetailsForBooking =  this.repo.getCardDetailsForBooking(doctorID, date);
+
+            if (appointmentbyDetailsForBooking.Count == 0)
+                return null;
+            
             List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
             foreach (var ApptId in appointmentbyDetailsForBooking)
             {
