@@ -166,10 +166,8 @@ namespace UnitTestProject
                 // Any other exception should cause the test to fail
                 Assert.Fail();
             }
-
             //assert
             //Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
-
 
         }
 
@@ -431,7 +429,6 @@ namespace UnitTestProject
             //assert
             //Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
 
-
         }
 
         [TestMethod]
@@ -448,7 +445,6 @@ namespace UnitTestProject
 
             //assert
             Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
-
         }
 
         [TestMethod]
@@ -477,11 +473,154 @@ namespace UnitTestProject
                 // Any other exception should cause the test to fail
                 Assert.Fail();
             }
-
             //assert
             //Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
 
 
         }
+        [TestMethod]
+        public void TestClinicsFound()
+        {
+            //arrange
+            var clinic = new List<Clinic>();
+            var mockBL = new Mock<IBusinessLayerAsync>();
+            mockBL.Setup(x => x.getClinicAsync()).ReturnsAsync(clinic);
+            var controller = new ClinicAsyncController(mockBL.Object);
+
+            //act
+            var mockResult = controller.GET();
+
+            //assert
+            Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
+
+
+        }
+
+        [TestMethod]
+        public void TestClinicsFoundThrowsException()
+        {
+            //arrange
+            List<Clinic> clinic = null;
+            var mockBL = new Mock<IBusinessLayerAsync>();
+            mockBL.Setup(x => x.getClinicAsync()).ReturnsAsync(clinic);
+            var controller = new ClinicAsyncController(mockBL.Object);
+
+            try
+            {
+                //act
+                var mockResult = controller.GET();
+            }
+
+            catch (HttpException ex)
+            {
+                // HttpException is expected
+                Assert.AreEqual(404, (int)ex.GetHttpCode());
+                //Assert.AreEqual("Not authorized.", ex.Message);
+            }
+            catch (Exception)
+            {
+                // Any other exception should cause the test to fail
+                Assert.Fail();
+            }
+
+
+        }
+
+        [TestMethod]
+        public void TestMedicineFound()
+        {
+            //arrange
+            var medicine = new List<Medicine>();
+            var mockBL = new Mock<IBusinessLayerAsync>();
+            mockBL.Setup(x => x.getMedicineAsync()).ReturnsAsync(medicine);
+            var controller = new MedicineAsyncController(mockBL.Object);
+
+            //act
+            var mockResult = controller.GET();
+
+            //assert
+            Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
+
+
+        }
+
+        [TestMethod]
+        public void TestMedicineFoundThrowsException()
+        {
+            //arrange
+            List<Medicine> medicine = null;
+            var mockBL = new Mock<IBusinessLayerAsync>();
+            mockBL.Setup(x => x.getMedicineAsync()).ReturnsAsync(medicine);
+            var controller = new MedicineAsyncController(mockBL.Object);
+
+            try
+            {
+                //act
+                var mockResult = controller.GET();
+            }
+
+            catch (HttpException ex)
+            {
+                // HttpException is expected
+                Assert.AreEqual(404, (int)ex.GetHttpCode());
+                //Assert.AreEqual("Not authorized.", ex.Message);
+            }
+            catch (Exception)
+            {
+                // Any other exception should cause the test to fail
+                Assert.Fail();
+            }
+
+
+        }
+
+        [TestMethod]
+        public void TestTestsFound()
+        {
+            //arrange
+            var test = new List<Test>();
+            var mockBL = new Mock<IBusinessLayerAsync>();
+            mockBL.Setup(x => x.getTestsAsync()).ReturnsAsync(test);
+            var controller = new TestAsyncController(mockBL.Object);
+
+            //act
+            var mockResult = controller.GET();
+
+            //assert
+            Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
+
+
+        }
+
+        [TestMethod]
+        public void TestTestsFoundThrowsException()
+        {
+            //arrange
+            List<Test> test = null;
+            var mockBL = new Mock<IBusinessLayerAsync>();
+            mockBL.Setup(x => x.getTestsAsync()).ReturnsAsync(test);
+            var controller = new TestAsyncController(mockBL.Object);
+
+            try
+            {
+                //act
+                var mockResult = controller.GET();
+            }
+
+            catch (HttpException ex)
+            {
+                // HttpException is expected
+                Assert.AreEqual(404, (int)ex.GetHttpCode());
+                //Assert.AreEqual("Not authorized.", ex.Message);
+            }
+            catch (Exception)
+            {
+                // Any other exception should cause the test to fail
+                Assert.Fail();
+            }
+
+
+        }
+        
     }
 }
