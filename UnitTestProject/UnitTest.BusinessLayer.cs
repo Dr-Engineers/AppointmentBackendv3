@@ -10,14 +10,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 
-
 namespace UnitTestProject
 {
     [TestClass]
     public class UnitTest1
     {
-
-        
         [TestMethod]
         public async Task TestEditAppointmentIfNotPresent()
         {
@@ -70,12 +67,11 @@ namespace UnitTestProject
 
         }
 
-      
-
 
         [TestMethod]
         public async Task TestGetAppointmentAsync()
         {
+
             var mock = new Mock<IAppointmentRepoAsync>();
             mock.Setup(x => x.getAppointmentAsync(1)).ReturnsAsync(new Appointment
             {
