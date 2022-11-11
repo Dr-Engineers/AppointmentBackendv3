@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Appointmentv3.BL
 {
@@ -81,6 +82,10 @@ namespace Appointmentv3.BL
         public async Task<List<CardDetailsDTO>> getCardDetailsByDoctorIDAsync(int doctorID)
         {
             var appointmentsByDocId = await this.repo.getCardDetailsByDoctorIDAsync(doctorID);
+
+            if(appointmentsByDocId.Count == 0)
+                throw new HttpException(404, $"No Appointment with Appointment ID: {doctorID}");
+
             List<CardDetailsDTO> CardDetails = new List<CardDetailsDTO>();
             foreach (var ApptId in appointmentsByDocId)
             {
