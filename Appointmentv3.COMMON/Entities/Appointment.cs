@@ -19,6 +19,7 @@ namespace Appointmentv3.COMMON.Entities
         public virtual List<DiagnosedSymptom> DiagnosedSymptomID { get; set; }
         public virtual Vital VitalID { get; set; }
         public virtual List<PrescribedTest> PrescribedTestID { get; set; }
-        public virtual List<Recommendation> RecommendationID { get; set; }
+        public virtual List<RecommendedClinic> RecommendedClinics { get; set; }
+        public virtual List<RecommendedDoctor> RecommendedDoctors { get; set; }
     }
 }
