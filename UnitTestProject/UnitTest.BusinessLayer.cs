@@ -29,29 +29,9 @@ namespace UnitTestProject
                 } 
             });
             IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getClinicAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<Clinic>));
 
-            List<Clinic> expected = new List<Clinic>()
-            {   new Clinic()
-                {
-                    ClinicID = 1,
-                    ClinicName = "clinicName1"
-                },
-                new Clinic()
-                {
-                    ClinicID = 2,
-                    ClinicName = "clinicName2"
-                }
-            };
-
-            List<Clinic> actual = await bl.getClinicAsync();
-            Assert.AreEqual(expected, actual);
-
-        }
-
-
-        [TestMethod]
-        public void TestAppointmentsNotFoundWithDoctorID()
-        {
         }
 
         [TestMethod]
@@ -71,24 +51,10 @@ namespace UnitTestProject
                 }
             });
             IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
-
-            List<Medicine> expected = new List<Medicine>()
-            {   new Medicine()
-                {
-                    MedicineID = 1,
-                    MedicineName = "MedicineName1"
-                },
-                new Medicine()
-                {
-                    MedicineID = 2,
-                    MedicineName = "MedicineName2"
-                }
-            };
-
-            List<Medicine> actual = await bl.getMedicineAsync();
-            Assert.AreEqual(expected, actual);
-
+            var actual = await bl.getMedicineAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<Medicine>));
         }
+
         [TestMethod]
         public async Task TestGetSymptoms()
         {
@@ -106,24 +72,10 @@ namespace UnitTestProject
                 }
             });
             IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
-
-            List<Symptom> expected = new List<Symptom>()
-            {   new Symptom()
-                {
-                    SymptomID = 1,
-                    SymptomName = "SymptomName1"
-                },
-                new Symptom()
-                {
-                    SymptomID = 2,
-                    SymptomName = "SymptomName2"
-                }
-            };
-
-            List<Symptom> actual = await bl.getSymptomAsync();
-            Assert.AreEqual(expected, actual);
-
+            var actual = await bl.getSymptomAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<Symptom>));
         }
+
         [TestMethod]
         public async Task TestGetPetIssues()
         {
@@ -141,24 +93,10 @@ namespace UnitTestProject
                 }
             });
             IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
-
-            List<PetIssue> expected = new List<PetIssue>()
-            {   new PetIssue()
-                {
-                    PetIssueID = 1,
-                    PetIssueName = "PetIssueName1"
-                },
-                new PetIssue()
-                {
-                    PetIssueID = 2,
-                    PetIssueName = "PetIssueName2"
-                }
-            };
-
-            List<PetIssue> actual = await bl.getPetIssueAsync();
-            Assert.AreEqual(expected, actual);
-
+            var actual = await bl.getPetIssueAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<PetIssue>));
         }
+
         [TestMethod]
         public async Task TestGetTests()
         {
@@ -176,23 +114,8 @@ namespace UnitTestProject
                 }
             });
             IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
-
-            List<Test> expected = new List<Test>()
-            {   new Test()
-                {
-                    TestID = 1,
-                    TestName = "TestName1"
-                },
-                new Test()
-                {
-                    TestID = 2,
-                    TestName = "TestName2"
-                }
-            };
-
-            List<Test> actual = await bl.getTestsAsync();
-            Assert.AreEqual(expected, actual);
-
-        }
+            var actual = await bl.getTestsAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<Test>));
+        }       
     }
 }
