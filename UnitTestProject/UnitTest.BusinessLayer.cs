@@ -15,42 +15,62 @@ namespace UnitTestProject
     [TestClass]
     public class UnitTest1
     {
-        //[TestMethod]
-        //public async Task TestGetClinics()
-        //{
-        //    var mock = new Mock<IAppointmentRepoAsync>();
-        //    mock.Setup(x => x.getClinicAsync()).ReturnsAsync(new List<Clinic>()
-        //    {   new Clinic()
-        //        {
-        //            ClinicID = 1,
-        //            ClinicName = "clinicName1"
-        //        },
-        //        new Clinic()
-        //        {
-        //            ClinicID = 2,
-        //            ClinicName = "clinicName2"
-        //        }
-        //    });
 
-        //    IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
+        
+        [TestMethod]
+        public async Task TestEditAppointmentIfNotPresent()
+        {
+            var mock = new Mock<IAppointmentRepoAsync>();
+            Appointment appt = new Appointment
+            {
+                DiagnosedSymptomID = new List<DiagnosedSymptom>(),
+                ObservedPetIssueID = new List<ObservedPetIssue>(),
+                PrescribedTestID = new List<PrescribedTest>(),
+                Prescription = new List<PrescribedMedicine>(),
+                RecommendedClinics = new List<RecommendedClinic>(),
+                RecommendedDoctors = new List<RecommendedDoctor>(),
+                VitalID = new Vital(),
+                AppointmentID = 1,
+                PetID = 1,
+                DoctorID = 2,
+                AppointmentDate = Convert.ToDateTime("10/11/2022"),
+                AppointmentStatus = Status.Closed,
+                Reason = "THIS IS TESTING"
 
-        //    List<Clinic> expected = new List<Clinic>()
-        //    {   new Clinic()
-        //        {
-        //            ClinicID = 1,
-        //            ClinicName = "clinicName1"
-        //        },
-        //        new Clinic()
-        //        {
-        //            ClinicID = 2,
-        //            ClinicName = "clinicName2"
-        //        }
-        //    };
+            };
 
-        //    // The AreEqual doesn't helps out in comparing the attribute by attribute. better compre the data type
-        //    List<Clinic> actual = await bl.getClinicAsync();
-        //    Assert.AreEqual(expected, actual);
-        //}
+            mock.Setup(x => x.editAppointmentAsync(1, appt)).ReturnsAsync(new Appointment
+            {
+                DiagnosedSymptomID = new List<DiagnosedSymptom>(),
+                ObservedPetIssueID = new List<ObservedPetIssue>(),
+                PrescribedTestID = new List<PrescribedTest>(),
+                Prescription = new List<PrescribedMedicine>(),
+                RecommendedClinics = new List<RecommendedClinic>(),
+                RecommendedDoctors = new List<RecommendedDoctor>(),
+                VitalID = new Vital(),
+                AppointmentID = 1,
+                PetID = 1,
+                DoctorID = 2,
+                AppointmentDate = Convert.ToDateTime("10/11/2022"),
+                AppointmentStatus = Status.Confirmed,
+                Reason = "THIS IS TESTING"
+
+            });
+
+            IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
+            try
+            {
+                var actual = await bl.editAppointmentAsync(21, appt);
+            }
+            catch (HttpException ex)
+            {
+                Assert.AreEqual(404, (int)ex.GetHttpCode());
+            }
+
+        }
+
+      
+
 
         [TestMethod]
         public async Task TestGetAppointmentAsync()
@@ -62,7 +82,8 @@ namespace UnitTestProject
                 ObservedPetIssueID = new List<ObservedPetIssue>(),
                 PrescribedTestID = new List<PrescribedTest>(),
                 Prescription = new List<PrescribedMedicine>(),
-                RecommendationID = new List<Recommendation>(),
+                RecommendedClinics = new List<RecommendedClinic>(),
+                RecommendedDoctors = new List<RecommendedDoctor>(),
                 VitalID = new Vital(),
                 AppointmentID = 1,
                 PetID = 1,
@@ -77,7 +98,6 @@ namespace UnitTestProject
 
             var actual = await bl.getAppointmentAsync(1);
             Assert.IsInstanceOfType(actual, typeof(Appointment));
-
         }
 
 
@@ -91,7 +111,8 @@ namespace UnitTestProject
                 ObservedPetIssueID = new List<ObservedPetIssue>(),
                 PrescribedTestID = new List<PrescribedTest>(),
                 Prescription = new List<PrescribedMedicine>(),
-                RecommendationID = new List<Recommendation>(),
+                RecommendedClinics = new List<RecommendedClinic>(),
+                RecommendedDoctors = new List<RecommendedDoctor>(),
                 VitalID = new Vital(),
                 AppointmentID = 1,
                 PetID = 1,
@@ -103,70 +124,30 @@ namespace UnitTestProject
             });
 
             IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
-
-            var actual = await bl.getAppointmentAsync(12);
-            Assert.AreEqual(actual, null);
+            try
+            {
+                var actual = await bl.getAppointmentAsync(12);
+            }
+            catch (HttpException ex)
+            {
+                Assert.AreEqual(404, (int)ex.GetHttpCode());
+            }
         }
 
 
-        [TestMethod]
-        public async Task TestEditAppointmentAsyncIfPresent()
-        {
-            // working on return type
-            var mock = new Mock<IAppointmentRepoAsync>();
-            mock.Setup(x => x.getAppointmentAsync(1)).ReturnsAsync(new Appointment
-            {
-                DiagnosedSymptomID = new List<DiagnosedSymptom>(),
-                ObservedPetIssueID = new List<ObservedPetIssue>(),
-                PrescribedTestID = new List<PrescribedTest>(),
-                Prescription = new List<PrescribedMedicine>(),
-                RecommendationID = new List<Recommendation>(),
-                VitalID = new Vital(),
-                AppointmentID = 1,
-                PetID = 1,
-                DoctorID = 2,
-                AppointmentDate = Convert.ToDateTime("10/11/2022"),
-                AppointmentStatus = Status.Confirmed,
-                Reason = "THIS IS TESTING"
-
-            });
-
-            Appointment EditedAppointment = new Appointment()
-            {
-                DiagnosedSymptomID = new List<DiagnosedSymptom>(),
-                ObservedPetIssueID = new List<ObservedPetIssue>(),
-                PrescribedTestID = new List<PrescribedTest>(),
-                Prescription = new List<PrescribedMedicine>(),
-                RecommendationID = new List<Recommendation>(),
-                VitalID = new Vital(),
-                AppointmentID = 1,
-                PetID = 1,
-                DoctorID = 2,
-                AppointmentDate = Convert.ToDateTime("10/11/2022"),
-                AppointmentStatus = Status.Confirmed,
-                Reason = "THIS IS TESTING for edit"
-            };
-
-
-            IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
-            var actual = await bl.getClinicAsync();
-            Assert.IsInstanceOfType(actual, typeof(List<Clinic>));
-            var actual = await bl.editAppointmentAsync(1, EditedAppointment);
-            Assert.IsInstanceOfType(actual, typeof(Appointment));
-        }
-
+        
 
         [TestMethod]
-        public void TestGetAppointmentByDocIdIfNot()
+        public async Task TestGetAppointmentByDocIdIfNotPresent()
         {
             var mock = new Mock<IAppointmentRepoAsync>();
             mock.Setup(x => x.getCardDetailsByDoctorIDAsync(1)).ReturnsAsync(new List<Appointment>());
             var bl = new BusinessLayerAsync(mock.Object);
             try
             {
-              var xyz =  bl.getCardDetailsByDoctorIDAsync(1);
-            } 
-            catch(HttpException ex)
+                var xyz = await bl.getCardDetailsByDoctorIDAsync(1);
+            }
+            catch (HttpException ex)
             {
                 Assert.AreEqual(404, (int)ex.GetHttpCode());
             }
@@ -174,11 +155,177 @@ namespace UnitTestProject
 
 
         [TestMethod]
-        public void TestGetAppointmentByDocId()
+        public async Task TestGetAppointmentByDocId()
         {
             var mock = new Mock<IAppointmentRepoAsync>();
+            mock.Setup(x => x.getCardDetailsByDoctorIDAsync(2)).ReturnsAsync(new List<Appointment>()
+            {
+                 new Appointment()
+                {
+                    DiagnosedSymptomID = new List<DiagnosedSymptom>(),
+                ObservedPetIssueID = new List<ObservedPetIssue>(),
+                PrescribedTestID = new List<PrescribedTest>(),
+                Prescription = new List<PrescribedMedicine>(),
+                RecommendedClinics = new List<RecommendedClinic>(),
+                RecommendedDoctors = new List<RecommendedDoctor>(),
+                VitalID = new Vital(),
+                AppointmentID = 1,
+                PetID = 1,
+                DoctorID = 2,
+                AppointmentDate = Convert.ToDateTime("10/11/2022"),
+                AppointmentStatus = Status.Confirmed,
+                Reason = "THIS IS TESTING"
+                },
+                new Appointment()
+                {
+                    DiagnosedSymptomID = new List<DiagnosedSymptom>(),
+                ObservedPetIssueID = new List<ObservedPetIssue>(),
+                PrescribedTestID = new List<PrescribedTest>(),
+                Prescription = new List<PrescribedMedicine>(),
+                RecommendedClinics = new List<RecommendedClinic>(),
+                RecommendedDoctors = new List<RecommendedDoctor>(),
+                VitalID = new Vital(),
+                AppointmentID = 2,
+                PetID = 1,
+                DoctorID = 2,
+                AppointmentDate = Convert.ToDateTime("11/11/2022"),
+                AppointmentStatus = Status.Confirmed,
+                Reason = "THIS IS TESTING"
+                }
+            });
+
+            var bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getCardDetailsByDoctorIDAsync(2);
+            Assert.IsInstanceOfType(actual, typeof(List<CardDetailsDTO>));
 
         }
+
+        [TestMethod]
+        public async Task TestGetCardDetailsByPetIdAsyncIfNotPresent()
+        {
+            var mock = new Mock<IAppointmentRepoAsync>();
+            mock.Setup(x => x.getCardDetailsByPetIDAsync(5)).ReturnsAsync(new List<Appointment>());
+            var bl = new BusinessLayerAsync(mock.Object);
+            try
+            {
+                var xyz = await bl.getCardDetailsByPetIDAsync(5);
+            }
+            catch (HttpException ex)
+            {
+                Assert.AreEqual(404, (int)ex.GetHttpCode());
+            }
+        }
+
+        [TestMethod]
+        public async Task TestGetCardDetailsByPetIdAsync()
+        {
+            var mock = new Mock<IAppointmentRepoAsync>();
+            mock.Setup(x => x.getCardDetailsByPetIDAsync(1)).ReturnsAsync(new List<Appointment>()
+            {
+                new Appointment()
+                {
+                    DiagnosedSymptomID = new List<DiagnosedSymptom>(),
+                ObservedPetIssueID = new List<ObservedPetIssue>(),
+                PrescribedTestID = new List<PrescribedTest>(),
+                Prescription = new List<PrescribedMedicine>(),
+                RecommendedClinics = new List<RecommendedClinic>(),
+                RecommendedDoctors = new List<RecommendedDoctor>(),
+                VitalID = new Vital(),
+                AppointmentID = 1,
+                PetID = 1,
+                DoctorID = 2,
+                AppointmentDate = Convert.ToDateTime("10/11/2022"),
+                AppointmentStatus = Status.Confirmed,
+                Reason = "THIS IS TESTING"
+                },
+                new Appointment()
+                {
+                    DiagnosedSymptomID = new List<DiagnosedSymptom>(),
+                ObservedPetIssueID = new List<ObservedPetIssue>(),
+                PrescribedTestID = new List<PrescribedTest>(),
+                Prescription = new List<PrescribedMedicine>(),
+                RecommendedClinics = new List<RecommendedClinic>(),
+                RecommendedDoctors = new List<RecommendedDoctor>(),
+                VitalID = new Vital(),
+                AppointmentID = 2,
+                PetID = 1,
+                DoctorID = 3,
+                AppointmentDate = Convert.ToDateTime("11/11/2022"),
+                AppointmentStatus = Status.Confirmed,
+                Reason = "THIS IS TESTING"
+                }
+            });
+
+            var bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getCardDetailsByPetIDAsync(1);
+            Assert.IsInstanceOfType(actual, typeof(List<CardDetailsDTO>));
+            
+        }
+
+        [TestMethod]
+        public async Task TestgetCardDetailsForBookingAsync()
+        {
+            var mock = new Mock<IAppointmentRepoAsync>();
+            DateTime dt = new DateTime();
+            mock.Setup(x => x.getCardDetailsForBookingAsync(1, dt)).ReturnsAsync(new List<Appointment>()
+            {
+                 new Appointment()
+                {
+                    DiagnosedSymptomID = new List<DiagnosedSymptom>(),
+                ObservedPetIssueID = new List<ObservedPetIssue>(),
+                PrescribedTestID = new List<PrescribedTest>(),
+                Prescription = new List<PrescribedMedicine>(),
+                RecommendedClinics = new List<RecommendedClinic>(),
+                RecommendedDoctors = new List<RecommendedDoctor>(),
+                VitalID = new Vital(),
+                AppointmentID = 1,
+                PetID = 1,
+                DoctorID = 2,
+                AppointmentDate = Convert.ToDateTime("10/11/2022"),
+                AppointmentStatus = Status.Confirmed,
+                Reason = "THIS IS TESTING"
+                },
+                new Appointment()
+                {
+                    DiagnosedSymptomID = new List<DiagnosedSymptom>(),
+                ObservedPetIssueID = new List<ObservedPetIssue>(),
+                PrescribedTestID = new List<PrescribedTest>(),
+                Prescription = new List<PrescribedMedicine>(),
+                RecommendedClinics = new List<RecommendedClinic>(),
+                RecommendedDoctors = new List<RecommendedDoctor>(),
+                VitalID = new Vital(),
+                AppointmentID = 2,
+                PetID = 1,
+                DoctorID = 3,
+                AppointmentDate = Convert.ToDateTime("11/11/2022"),
+                AppointmentStatus = Status.Confirmed,
+                Reason = "THIS IS TESTING"
+                }
+            });
+
+            var bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getCardDetailsForBookingAsync(1, dt);
+            Assert.IsInstanceOfType(actual, typeof(List<CardDetailsDTO>));
+        }
+
+        [TestMethod]
+        public async Task TestGetCardDetailsForBookingIfNotPresent()
+        {
+            var mock = new Mock<IAppointmentRepoAsync>();
+            DateTime dt = new DateTime();
+            mock.Setup(x => x.getCardDetailsForBookingAsync(5, dt)).ReturnsAsync(new List<Appointment>());
+            var bl = new BusinessLayerAsync(mock.Object);
+            try
+            {
+                var xyz = await bl.getCardDetailsForBookingAsync(5, dt);
+            }
+            catch (HttpException ex)
+            {
+                Assert.AreEqual(404, (int)ex.GetHttpCode());
+            }
+        }
+
+
 
         [TestMethod]
         public async Task TestGetMedicines()
@@ -189,35 +336,12 @@ namespace UnitTestProject
                 {
                     MedicineID = 1,
                     MedicineName = "MedicineName1"
-            List<CardDetailsDTO> list = new List<CardDetailsDTO>()
-            { new CardDetailsDTO()
-                {
-                AppointmentID = 1,
-                PetID = 1,
-                DoctorID = 2,
-                AppointmentDate =  Convert.ToDateTime("11/11/2022"),
-                AppointmentStatus = Status.Confirmed
-                },
-                new Medicine()
-            new CardDetailsDTO()
-                {
-                    MedicineID = 2,
-                    MedicineName = "MedicineName2"
-                AppointmentID = 3,
-                PetID = 1,
-                DoctorID = 2,
-                AppointmentDate =  Convert.ToDateTime("10/11/2022") ,
-                AppointmentStatus = Status.Closed
-                }
-            });
+            } });
+
             IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
             var actual = await bl.getMedicineAsync();
             Assert.IsInstanceOfType(actual, typeof(List<Medicine>));
         }
-            };
-            int docId = 2;
-            mock.Setup(x => x.getCardDetailsByDoctorIDAsync(1)).ReturnsAsync(new List<Appointment>());
-            //mock.Setup(x => x.getCardDetailsByDoctorIDAsync(docId)).ReturnsAsync(list);
 
 
         [TestMethod]
@@ -236,28 +360,11 @@ namespace UnitTestProject
                     PetIssueName = "PetIssueName2"
                 }
             });
+
             IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
             var actual = await bl.getPetIssueAsync();
             Assert.IsInstanceOfType(actual, typeof(List<PetIssue>));
-            IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
-            var actual = bl.getCardDetailsByDoctorIDAsync(2);
-            Assert.IsInstanceOfType(actual, typeof(List<CardDetailsDTO>));
-            return Task.CompletedTask;
         }
-
-
-
-        //[TestMethod]
-        //public async Task TestAppointmentDataAsyncV2()
-        //{
-        //    var mockObj = new Mock<IAppointmentRepoAsync>();
-        //    mockObj.Setup(x => x.getAppointmentAsync(1)).ReturnsAsync( new Appointment
-        //    {
-
-        //    });
-        //}
-
-
 
         [TestMethod]
         public async Task TestGetTests()
@@ -278,52 +385,7 @@ namespace UnitTestProject
             IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
             var actual = await bl.getTestsAsync();
             Assert.IsInstanceOfType(actual, typeof(List<Test>));
-        }       
-        public async Task TestAppointmentAlreadySchedule()
-        {
-            //Appointmentv3.COMMON.Entities.Appointment Actual = new Appointmentv3.COMMON.Entities.Appointment();
-            //List<ObservedPetIssue> issues = new List<ObservedPetIssue>();
-            //List<PrescribedMedicine> PrescribedMedicines = new List<PrescribedMedicine>();
-            //List<DiagnosedSymptom> DiagnosedSymptoms = new List<DiagnosedSymptom>();
-            //List<PrescribedTest> PrescribedTests = new List<PrescribedTest>();
-            //List<Recommendation> Recommendations = new List<Recommendation>();
-
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    ObservedPetIssue observedPetIssue = new ObservedPetIssue();
-            //    observedPetIssue.ObservedPetIssueID = i;
-            //    observedPetIssue.PetIssue.PetIssueID = i;
-            //    observedPetIssue.PetIssue.PetIssueName = $"Leg Fracture + {i}";
-
-            //    issues.Add(observedPetIssue);
-            //}
-
-            //for(int i = 0; i < 3; i++)
-            //{
-            //    PrescribedMedicine prescribedMedicine = new PrescribedMedicine();
-            //    prescribedMedicine.PrescribedMedicineID = i;
-            //    prescribedMedicine.Days = i;
-            //    prescribedMedicine.Morning = true;
-            //    prescribedMedicine.Afternoon = true;
-            //    prescribedMedicine.Night = false;
-            //    prescribedMedicine.BeforeFood = true;
-            //    prescribedMedicine.Comments = $"Comment no {i}";
-
-            //    prescribedMedicine.Medicine.MedicineID = i + 100;
-            //    prescribedMedicine.Medicine.MedicineName = $"Medicine {i}";
-
-            //    PrescribedMedicines.Add(prescribedMedicine);
-            //}
-
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    DiagnosedSymptom diagnosedSymptom = new DiagnosedSymptom();
-            //    diagnosedSymptom.DiagnosedSymptomID = i + 102;
-
-            //}
-
         }
 
-        
     }
 }
