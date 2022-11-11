@@ -22,5 +22,12 @@ namespace Appointmentv3.API.Controllers
                 throw new HttpException(404, "Tests data not available");
             return Ok(bl.getTests());
         }
+        [HttpPost]
+        [Route("api/Tests/{testName}")]
+        public IHttpActionResult POST(string testName)
+        {
+            bl.CreateTest(testName);
+            return Ok();
+        }
     }
 }

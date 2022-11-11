@@ -29,5 +29,12 @@ namespace Appointmentv3.API.Controllers
 
             return Ok(bl.getClinic());
         }
+        [HttpPost]
+        [Route("api/clinic/{clinicName}")]
+        public IHttpActionResult POST(string clinicName)
+        {
+            bl.CreateClinc(clinicName);
+            return Ok();
+        }
     }
 }

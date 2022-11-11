@@ -23,5 +23,12 @@ namespace Appointmentv3.API.Controllers
                 throw new HttpException(404, "PetIssue data not available");
             return Ok(bl.getPetIssue());
         }
+        [HttpPost]
+        [Route("api/petIssue/{petIssue}")]
+        public IHttpActionResult POST(string petIssue)
+        {
+            bl.CreatePetIssue(petIssue);
+            return Ok();
+        }
     }
 }

@@ -21,6 +21,36 @@ namespace Appointmentv3.DAL
             return creatingAppointment;
         }
 
+        public void CreateClinic(string clinicName)
+        {
+            db.Clinics.Add(new Clinic() { ClinicName = clinicName });
+            db.SaveChanges();
+        }
+
+        public void CreateMedicine(string medicineName)
+        {
+            db.Medicines.Add(new Medicine() { MedicineName = medicineName });
+            db.SaveChanges();
+        }
+
+        public void CreatePetIssue(string petIssueName)
+        {
+            db.PetIssues.Add(new PetIssue() { PetIssueName = petIssueName });
+            db.SaveChanges();
+        }
+
+        public void CreateSymptom(string symptomName)
+        {
+            db.Symptoms.Add(new Symptom() { SymptomName = symptomName });
+            db.SaveChanges();
+        }
+
+        public void CreateTest(string testName)
+        {
+            db.Tests.Add(new Test() { TestName = testName });
+            db.SaveChanges();
+        }
+
         public Appointment editAppointment(int appointmentID, Appointment editedAppointment)
         {
             var appt = db.Appointments.Find(appointmentID);

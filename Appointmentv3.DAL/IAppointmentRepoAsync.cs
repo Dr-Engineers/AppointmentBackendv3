@@ -15,11 +15,16 @@ namespace Appointmentv3.DAL
         Task<List<Appointment>> getCardDetailsByPetIDAsync(int petID);
         Task<List<Appointment>> getCardDetailsForBookingAsync(int doctorID, DateTime date);
         Task<List<Test>> getTestsAsync();
+        Task CreateTestsAsync(string testName);
         Task<List<Clinic>> getClinicAsync();
+        Task CreateClinicAsync(string clinicName);
         Task<List<Symptom>> getSymptomAsync();
+        Task CreatesymptomAsync(string symptomName);
         Task<List<PetIssue>> getPetIssueAsync();
-        Task<PetIssue> GetPetIssueByIdAsync(int id);
+        Task CreatePetIssueAsync(string petIssueName);
         Task<List<Medicine>> getMedicineAsync();
+        Task CreateMedicineAsync(string medicineName);
+        Task<PetIssue> GetPetIssueByIdAsync(int id);
         Task<Appointment> getAppointmentAsync(int appointmentID);
         Task<Appointment> editAppointmentAsync(int appointmentID, Appointment editedAppointment);
         Task<Appointment> createAppointmentAsync(Appointment creatingAppointment);

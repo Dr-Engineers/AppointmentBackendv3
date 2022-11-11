@@ -19,7 +19,35 @@ namespace Appointmentv3.DAL
             await db.SaveChangesAsync();
             return creatingAppointment;
         }
+        public async Task CreateClinicAsync(string clinicName)
+        {
+            db.Clinics.Add(new Clinic() { ClinicName = clinicName });
+            await db.SaveChangesAsync();
+        }
 
+        public async Task CreateMedicineAsync(string medicineName)
+        {
+            db.Medicines.Add(new Medicine() { MedicineName = medicineName });
+            await db.SaveChangesAsync();
+        }
+
+        public async Task CreatePetIssueAsync(string petIssueName)
+        {
+            db.PetIssues.Add(new PetIssue() { PetIssueName = petIssueName });
+            await db.SaveChangesAsync();
+        }
+
+        public async Task CreateSymptomAsync(string symptomName)
+        {
+            db.Symptoms.Add(new Symptom() { SymptomName = symptomName });
+            await db.SaveChangesAsync();
+        }
+
+        public async Task CreateTestAsync(string testName)
+        {
+            db.Tests.Add(new Test() { TestName = testName });
+            await db.SaveChangesAsync();
+        }
         public async Task<Appointment> editAppointmentAsync(int appointmentID, Appointment editedAppointment)
         {
             var appt = await db.Appointments.FindAsync(appointmentID);
