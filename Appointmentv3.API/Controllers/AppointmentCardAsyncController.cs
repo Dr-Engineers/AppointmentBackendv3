@@ -21,7 +21,6 @@ namespace Appointmentv3.API.Controllers
         [EnableQuery]
         [HttpGet]
         [Route("api/async/forDoctor/{doctorID}")]
-        
         public async Task<IQueryable<CardDetailsDTO>> getCardDetailsByDoctorID(int doctorID)
         {
             var doct = await bl.getCardDetailsByDoctorIDAsync(doctorID);
