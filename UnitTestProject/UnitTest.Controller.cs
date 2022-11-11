@@ -382,5 +382,106 @@ namespace UnitTestProject
             }
 
         }
+   
+
+        [TestMethod]
+        public void TestPetIssueFound()
+        {
+            //arrange
+            var petIssue = new List<PetIssue>();
+            var mockBL = new Mock<IBusinessLayerAsync>();
+            mockBL.Setup(x => x.getPetIssueAsync()).ReturnsAsync(petIssue);
+            var controller = new PetIssueAsyncController(mockBL.Object);
+
+            //act
+            var mockResult = controller.GET();
+
+            //assert
+            Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
+
+        }
+
+        [TestMethod]
+        public void TestGetPetIssuesThrowsException()
+        {
+            //arrange
+            List<PetIssue> petIssues = null;
+            var mockBL = new Mock<IBusinessLayerAsync>();
+            mockBL.Setup(x => x.getPetIssueAsync()).ReturnsAsync(petIssues);
+            var controller = new PetIssueAsyncController(mockBL.Object);
+
+            try
+            {
+                //act
+                var mockResult = controller.GET();
+            }
+
+            catch (HttpException ex)
+            {
+                // HttpException is expected
+                Assert.AreEqual(404, (int)ex.GetHttpCode());
+                //Assert.AreEqual("Not authorized.", ex.Message);
+            }
+            catch (Exception)
+            {
+                // Any other exception should cause the test to fail
+                Assert.Fail();
+            }
+
+            //assert
+            //Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
+
+
+        }
+
+        [TestMethod]
+        public void TestSymptomsFound()
+        {
+            //arrange
+            var symptoms = new List<Symptom>();
+            var mockBL = new Mock<IBusinessLayerAsync>();
+            mockBL.Setup(x => x.getSymptomAsync()).ReturnsAsync(symptoms);
+            var controller = new SymptomAsyncController(mockBL.Object);
+
+            //act
+            var mockResult = controller.GET();
+
+            //assert
+            Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
+
+        }
+
+        [TestMethod]
+        public void TestGetSymptomsThrowsException()
+        {
+            //arrange
+            List<Symptom> symptoms = null;
+            var mockBL = new Mock<IBusinessLayerAsync>();
+            mockBL.Setup(x => x.getSymptomAsync()).ReturnsAsync(symptoms);
+            var controller = new PetIssueAsyncController(mockBL.Object);
+
+            try
+            {
+                //act
+                var mockResult = controller.GET();
+            }
+
+            catch (HttpException ex)
+            {
+                // HttpException is expected
+                Assert.AreEqual(404, (int)ex.GetHttpCode());
+                //Assert.AreEqual("Not authorized.", ex.Message);
+            }
+            catch (Exception)
+            {
+                // Any other exception should cause the test to fail
+                Assert.Fail();
+            }
+
+            //assert
+            //Assert.IsInstanceOfType(mockResult, typeof(Task<IHttpActionResult>));
+
+
+        }
     }
 }
