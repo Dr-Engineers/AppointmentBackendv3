@@ -28,14 +28,28 @@ namespace Appointmentv3.DAL
             if(appt == null)
                 return null;
 
-            appt = editedAppointment;
+            //appt = editedAppointment;
 
-            db.Entry(appt).State = System.Data.Entity.EntityState.Modified;
-            db.Entry(appt.ObservedPetIssueID).State = System.Data.Entity.EntityState.Modified;
-            db.Entry(appt.Prescription).State = System.Data.Entity.EntityState.Modified;
-            db.Entry(appt.DiagnosedSymptomID).State = System.Data.Entity.EntityState.Modified;
-            db.Entry(appt.PrescribedTestID).State = System.Data.Entity.EntityState.Modified;
-            db.Entry(appt.RecommendationID).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(appt).CurrentValues.SetValues(editedAppointment);
+            db.Entry(appt.VitalID).CurrentValues.SetValues(editedAppointment.VitalID);
+            appt.ObservedPetIssueID.Clear();
+            db.Entry(appt).Collection(a => a.ObservedPetIssueID).CurrentValue = editedAppointment.ObservedPetIssueID;
+            appt.Prescription.Clear();
+            db.Entry(appt).Collection(a => a.Prescription).CurrentValue = editedAppointment.Prescription;
+            appt.DiagnosedSymptomID.Clear();
+            db.Entry(appt).Collection(a => a.DiagnosedSymptomID).CurrentValue = editedAppointment.DiagnosedSymptomID;
+            appt.PrescribedTestID.Clear();
+            db.Entry(appt).Collection(a => a.PrescribedTestID).CurrentValue = editedAppointment.PrescribedTestID;
+            appt.RecommendedDoctors.Clear();
+            db.Entry(appt).Collection(a => a.RecommendedDoctors).CurrentValue = editedAppointment.RecommendedDoctors;
+            appt.RecommendedClinics.Clear();
+            db.Entry(appt).Collection(a => a.RecommendedClinics).CurrentValue = editedAppointment.RecommendedClinics;
+            //db.Entry(appt).Collection(a => a.RecommendationID).CurrentValue = editedAppointment.RecommendationID;
+
+            //db.Entry(appt.Prescription).State = System.Data.Entity.EntityState.Modified;
+            //db.Entry(appt.DiagnosedSymptomID).State = System.Data.Entity.EntityState.Modified;
+            //db.Entry(appt.PrescribedTestID).State = System.Data.Entity.EntityState.Modified;
+            //db.Entry(appt.RecommendationID).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return editedAppointment;
         }
