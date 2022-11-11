@@ -1,10 +1,18 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Appointmentv3.BL;
+using Appointmentv3.COMMON.Entities.Preset;
+using Appointmentv3.DAL;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
+
 using Appointmentv3.BL;
 using Appointmentv3.COMMON.Entities;
 using System.Collections.Generic;
 using Appointmentv3.COMMON.Entities.Preset;
 using Appointmentv3.COMMON.DTO;
+
+using System.Threading.Tasks;
+
 
 namespace UnitTestProject
 {
@@ -12,16 +20,70 @@ namespace UnitTestProject
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public async Task TestGetClinics()
         {
 
-        }
+            var mock = new Mock<IAppointmentRepoAsync>();
+            mock.Setup(x => x.getClinicAsync()).ReturnsAsync(new List<Clinic>() 
+            {   new Clinic()
+                {
+                    ClinicID = 1,
+                    ClinicName = "clinicName1"
+                },
+                new Clinic()
+                {
+                    ClinicID = 2,
+                    ClinicName = "clinicName2"
+                } 
+            });
+            IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getClinicAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<Clinic>));
 
+        }
 
         [TestMethod]
-        public void TestAppointmentsNotFoundWithDoctorID()
+        public async Task TestGetMedicines()
         {
+            var mock = new Mock<IAppointmentRepoAsync>();
+            mock.Setup(x => x.getMedicineAsync()).ReturnsAsync(new List<Medicine>()
+            {   new Medicine()
+                {
+                    MedicineID = 1,
+                    MedicineName = "MedicineName1"
+                },
+                new Medicine()
+                {
+                    MedicineID = 2,
+                    MedicineName = "MedicineName2"
+                }
+            });
+            IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getMedicineAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<Medicine>));
         }
+
+        [TestMethod]
+        public async Task TestGetSymptoms()
+        {
+            var mock = new Mock<IAppointmentRepoAsync>();
+            mock.Setup(x => x.getSymptomAsync()).ReturnsAsync(new List<Symptom>()
+            {   new Symptom()
+                {
+                    SymptomID = 1,
+                    SymptomName = "SymptomName1"
+                },
+                new Symptom()
+                {
+                    SymptomID = 2,
+                    SymptomName = "SymptomName2"
+                }
+            });
+            IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getSymptomAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<Symptom>));
+        }
+
 
         [TestMethod]
         public void TestAppointmentAlreadySchedule()
@@ -69,10 +131,6 @@ namespace UnitTestProject
 
             var appointment = new RestClient();
 
-
-
-
-
         }
 
         [TestMethod]
@@ -88,6 +146,46 @@ namespace UnitTestProject
             Assert.AreEqual(expected, null);
         }
 
-        
+        [TestMethod]
+        public async Task TestGetPetIssues()
+        {
+            var mock = new Mock<IAppointmentRepoAsync>();
+            mock.Setup(x => x.getPetIssueAsync()).ReturnsAsync(new List<PetIssue>()
+            {   new PetIssue()
+                {
+                    PetIssueID = 1,
+                    PetIssueName = "PetIssueName1"
+                },
+                new PetIssue()
+                {
+                    PetIssueID = 2,
+                    PetIssueName = "PetIssueName2"
+                }
+            });
+            IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getPetIssueAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<PetIssue>));
+        }
+
+        [TestMethod]
+        public async Task TestGetTests()
+        {
+            var mock = new Mock<IAppointmentRepoAsync>();
+            mock.Setup(x => x.getTestsAsync()).ReturnsAsync(new List<Test>()
+            {   new Test()
+                {
+                    TestID = 1,
+                    TestName = "TestName1"
+                },
+                new Test()
+                {
+                    TestID = 2,
+                    TestName = "TestName2"
+                }
+            });
+            IBusinessLayerAsync bl = new BusinessLayerAsync(mock.Object);
+            var actual = await bl.getTestsAsync();
+            Assert.IsInstanceOfType(actual, typeof(List<Test>));
+        }       
     }
 }
