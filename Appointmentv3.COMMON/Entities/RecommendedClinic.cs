@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Appointmentv3.COMMON.Entities
 {
-    public class Recommendation
+    public class RecommendedClinic
     {
-        public int RecommendationID { get; set; }
-        public virtual List<Clinic> RecommendedClinic { get; set; }
-        public virtual List<Doctor> RecommendedDoctor { get; set; }
+        public int RecommendedClinicID { get; set; }
+        public int ClinicID { get; set; }
     }
 }

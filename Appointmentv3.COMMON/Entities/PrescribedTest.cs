@@ -10,6 +10,6 @@ namespace Appointmentv3.COMMON.Entities
     public class PrescribedTest
     {
         public int PrescribedTestID { get; set; }
-        public virtual Test Test { get; set; }
+        public int TestID { get; set; }
     }
 }
