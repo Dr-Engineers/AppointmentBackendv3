@@ -75,12 +75,17 @@ namespace Appointmentv3.DAL
             appt.RecommendedClinics.Clear();
             db.Entry(appt).Collection(a => a.RecommendedClinics).CurrentValue = editedAppointment.RecommendedClinics;
             //db.Entry(appt).Collection(a => a.RecommendationID).CurrentValue = editedAppointment.RecommendationID;
-
             //db.Entry(appt.Prescription).State = System.Data.Entity.EntityState.Modified;
             //db.Entry(appt.DiagnosedSymptomID).State = System.Data.Entity.EntityState.Modified;
             //db.Entry(appt.PrescribedTestID).State = System.Data.Entity.EntityState.Modified;
             //db.Entry(appt.RecommendationID).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
+            db.Database.ExecuteSqlCommand("DELETE FROM ObservedPetIssues WHERE Appointment_AppointmentID IS NULL");
+            db.Database.ExecuteSqlCommand("DELETE FROM Prescription WHERE Appointment_AppointmentID IS NULL");
+            db.Database.ExecuteSqlCommand("DELETE FROM DiagnosedSymptomID WHERE Appointment_AppointmentID IS NULL");
+            db.Database.ExecuteSqlCommand("DELETE FROM PrescribedTestID WHERE Appointment_AppointmentID IS NULL");
+            db.Database.ExecuteSqlCommand("DELETE FROM RecommendedDoctors WHERE Appointment_AppointmentID IS NULL");
+            db.Database.ExecuteSqlCommand("DELETE FROM RecommendedClinics WHERE Appointment_AppointmentID IS NULL");
             return editedAppointment;
         }
 

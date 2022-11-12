@@ -73,6 +73,12 @@ namespace Appointmentv3.DAL
             db.Entry(appt).Collection(a => a.RecommendedClinics).CurrentValue = editedAppointment.RecommendedClinics;
             //db.Entry(appt).Collection(a => a.RecommendationID).CurrentValue = editedAppointment.RecommendationID;
             await db.SaveChangesAsync();
+            await db.Database.ExecuteSqlCommandAsync("DELETE FROM ObservedPetIssues WHERE Appointment_AppointmentID IS NULL");
+            await db.Database.ExecuteSqlCommandAsync("DELETE FROM Prescription WHERE Appointment_AppointmentID IS NULL");
+            await db.Database.ExecuteSqlCommandAsync("DELETE FROM DiagnosedSymptomID WHERE Appointment_AppointmentID IS NULL");
+            await db.Database.ExecuteSqlCommandAsync("DELETE FROM PrescribedTestID WHERE Appointment_AppointmentID IS NULL");
+            await db.Database.ExecuteSqlCommandAsync("DELETE FROM RecommendedDoctors WHERE Appointment_AppointmentID IS NULL");
+            await db.Database.ExecuteSqlCommandAsync("DELETE FROM RecommendedClinics WHERE Appointment_AppointmentID IS NULL");
             return editedAppointment;
         }
 
