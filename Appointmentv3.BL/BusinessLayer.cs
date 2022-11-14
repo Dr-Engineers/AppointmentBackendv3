@@ -55,18 +55,17 @@ namespace Appointmentv3.BL
             
             var newAppointment = this.repo.createAppointment(appointment);
 
-            //var petClient = new RestClient();
-            //var doctorClient = new RestClient();
+            var petClient = new RestClient();
+            var doctorClient = new RestClient();
 
-            //var petRequest = new RestRequest("api/Pet/AddAppointment", Method.Put);
-            //petRequest.AddJsonBody(new { petId = newAppointment.PetID, AppointmentId = newAppointment.AppointmentID });
+            var petRequest = new RestRequest("https://petzeypetapi20221112164250.azurewebsites.net/api/Pet/AddAppointment", Method.Post);
+            petRequest.AddJsonBody(new { petId = newAppointment.PetID, AppointmentId = newAppointment.AppointmentID });
 
-            //var doctorRequest = new RestRequest("api/Doctors/AssignAppointmentToDoctor/{doctorId}", Method.Put);
-            //doctorRequest.AddUrlSegment("doctorId", newAppointment.DoctorID);
-            //doctorRequest.AddJsonBody(new { appointmentIdByAppointmentModule = newAppointment.AppointmentID });
+            var doctorRequest = new RestRequest($"https://apilayervet20221112172346.azurewebsites.net/api/Doctors/AssignAppointmentToDoctor/{newAppointment.DoctorID}", Method.Post);
+            doctorRequest.AddJsonBody(new { appointmentIdByAppointmentModule = newAppointment.AppointmentID });
 
-            //petClient.Execute(petRequest);
-            //doctorClient.Execute(doctorRequest);
+            petClient.Execute(petRequest);
+            doctorClient.Execute(doctorRequest);
 
             return newAppointment;
         }
