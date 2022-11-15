@@ -62,14 +62,14 @@ namespace Appointmentv3.DAL
 
             db.Entry(appt).CurrentValues.SetValues(editedAppointment);
             db.Entry(appt.VitalID).CurrentValues.SetValues(editedAppointment.VitalID);
-            appt.ObservedPetIssueID.Clear();
-            db.Entry(appt).Collection(a => a.ObservedPetIssueID).CurrentValue = editedAppointment.ObservedPetIssueID;
+            appt.ObservedPetIssues.Clear();
+            db.Entry(appt).Collection(a => a.ObservedPetIssues).CurrentValue = editedAppointment.ObservedPetIssues;
             appt.Prescription.Clear();
             db.Entry(appt).Collection(a => a.Prescription).CurrentValue = editedAppointment.Prescription;
-            appt.DiagnosedSymptomID.Clear();
-            db.Entry(appt).Collection(a => a.DiagnosedSymptomID).CurrentValue = editedAppointment.DiagnosedSymptomID;
-            appt.PrescribedTestID.Clear();
-            db.Entry(appt).Collection(a => a.PrescribedTestID).CurrentValue = editedAppointment.PrescribedTestID;
+            appt.DiagnosedSymptoms.Clear();
+            db.Entry(appt).Collection(a => a.DiagnosedSymptoms).CurrentValue = editedAppointment.DiagnosedSymptoms;
+            appt.PrescribedTests.Clear();
+            db.Entry(appt).Collection(a => a.PrescribedTests).CurrentValue = editedAppointment.PrescribedTests;
             appt.RecommendedDoctors.Clear();
             db.Entry(appt).Collection(a => a.RecommendedDoctors).CurrentValue = editedAppointment.RecommendedDoctors;
             appt.RecommendedClinics.Clear();
@@ -82,8 +82,8 @@ namespace Appointmentv3.DAL
             db.SaveChanges();
             db.Database.ExecuteSqlCommand("DELETE FROM ObservedPetIssues WHERE Appointment_AppointmentID IS NULL");
             db.Database.ExecuteSqlCommand("DELETE FROM Prescription WHERE Appointment_AppointmentID IS NULL");
-            db.Database.ExecuteSqlCommand("DELETE FROM DiagnosedSymptomID WHERE Appointment_AppointmentID IS NULL");
-            db.Database.ExecuteSqlCommand("DELETE FROM PrescribedTestID WHERE Appointment_AppointmentID IS NULL");
+            db.Database.ExecuteSqlCommand("DELETE FROM DiagnosedSymptoms WHERE Appointment_AppointmentID IS NULL");
+            db.Database.ExecuteSqlCommand("DELETE FROM PrescribedTests WHERE Appointment_AppointmentID IS NULL");
             db.Database.ExecuteSqlCommand("DELETE FROM RecommendedDoctors WHERE Appointment_AppointmentID IS NULL");
             db.Database.ExecuteSqlCommand("DELETE FROM RecommendedClinics WHERE Appointment_AppointmentID IS NULL");
             return editedAppointment;
