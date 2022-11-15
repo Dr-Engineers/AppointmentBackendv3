@@ -36,35 +36,36 @@ namespace Appointmentv3.BL
             appointment.DoctorID = creatingAppointment.DoctorID;
             appointment.AppointmentDate = creatingAppointment.AppoitmentDate;
             appointment.Reason = creatingAppointment.Reason;
-            appointment.ObservedPetIssueID = new List<ObservedPetIssue>();
+            appointment.ObservedPetIssues = new List<ObservedPetIssue>();
             foreach (var id in creatingAppointment.PetIssues)
             {
                 PetIssue petIssue = await this.repo.GetPetIssueByIdAsync(id);
                 ObservedPetIssue observedPetIssue = new ObservedPetIssue { PetIssueID = petIssue.PetIssueID };
-                appointment.ObservedPetIssueID.Add(observedPetIssue);
+                appointment.ObservedPetIssues.Add(observedPetIssue);
             }
             // Default values For the appointment
             appointment.AppointmentStatus = Status.Confirmed;
             appointment.RecommendedDoctors = new List<RecommendedDoctor>();
             appointment.RecommendedClinics = new List<RecommendedClinic>();
-            appointment.PrescribedTestID = new List<PrescribedTest>();
+            appointment.PrescribedTests = new List<PrescribedTest>();
             appointment.Prescription = new List<PrescribedMedicine>();
-            appointment.DiagnosedSymptomID = new List<DiagnosedSymptom>();
+            appointment.DiagnosedSymptoms = new List<DiagnosedSymptom>();
             appointment.VitalID = new Vital();
+            appointment.Comments = "";
 
             var newAppointment = await this.repo.createAppointmentAsync(appointment);
 
-            var petClient = new RestClient();
-            var doctorClient = new RestClient();
+            //var petClient = new RestClient();
+            //var doctorClient = new RestClient();
 
-            var petRequest = new RestRequest("https://petzeypetapi20221112164250.azurewebsites.net/api/Pet/AddAppointment", Method.Post);
-            petRequest.AddJsonBody(new { petId = newAppointment.PetID, AppointmentId = newAppointment.AppointmentID });
+            //var petRequest = new RestRequest("https://petzeypetapi20221112164250.azurewebsites.net/api/Pet/AddAppointment", Method.Post);
+            //petRequest.AddJsonBody(new { petId = newAppointment.PetID, AppointmentId = newAppointment.AppointmentID });
 
-            var doctorRequest = new RestRequest($"https://apilayervet20221112172346.azurewebsites.net/api/Doctors/AssignAppointmentToDoctor/{newAppointment.DoctorID}", Method.Post);
-            doctorRequest.AddJsonBody(new { appointmentIdByAppointmentModule = newAppointment.AppointmentID });
+            //var doctorRequest = new RestRequest($"https://apilayervet20221112172346.azurewebsites.net/api/Doctors/AssignAppointmentToDoctor/{newAppointment.DoctorID}", Method.Post);
+            //doctorRequest.AddJsonBody(new { appointmentIdByAppointmentModule = newAppointment.AppointmentID });
 
-            petClient.Execute(petRequest);
-            doctorClient.Execute(doctorRequest);
+            //petClient.Execute(petRequest);
+            //doctorClient.Execute(doctorRequest);
 
             return newAppointment;
         }
