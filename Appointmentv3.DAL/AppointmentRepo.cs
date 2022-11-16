@@ -117,7 +117,7 @@ namespace Appointmentv3.DAL
 
         public List<Appointment> getCardDetailsForBooking(int doctorID, DateTime date)
         {
-            var appointmentByPetID = db.Appointments.Where(appt => appt.DoctorID == doctorID && appt.AppointmentDate == date).ToList();
+            var appointmentByPetID = db.Appointments.Where(appt => appt.DoctorID == doctorID && appt.AppointmentDate.Date.ToString("d") == date.Date.ToString("d")).ToList();
             if (appointmentByPetID == null)
                 return null;
             return appointmentByPetID;

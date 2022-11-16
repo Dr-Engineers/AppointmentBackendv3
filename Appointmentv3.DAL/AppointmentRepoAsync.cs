@@ -109,7 +109,7 @@ namespace Appointmentv3.DAL
 
             public async Task<List<Appointment>> getCardDetailsForBookingAsync(int doctorID, DateTime date)
         {
-            var appointmentsByDocAndDate = await (db.Appointments.Where(appt => appt.DoctorID == doctorID && appt.AppointmentDate == date)).ToListAsync();
+            var appointmentsByDocAndDate = await db.Appointments.Where(appt => appt.DoctorID == doctorID && appt.AppointmentDate.Date.ToString("d") == date.Date.ToString("d")).ToListAsync();
             if (appointmentsByDocAndDate == null)
                 return null;
             return appointmentsByDocAndDate;
