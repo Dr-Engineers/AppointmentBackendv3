@@ -25,7 +25,7 @@ namespace Appointmentv3.BL
         Task<List<Medicine>> getMedicineAsync();
         Task CreateMedicineAsync(string medicineTest);
         Task<Appointment> getAppointmentAsync(int appointmentID);
-        Task<Appointment> editAppointmentAsync(int appointmentID, Appointment editedAppointment);
-        Task<Appointment> createAppointmentAsync(CreatingAppointmentDTO creatingAppointment);
+        Task<Appointment> editAppointmentAsync(int appointmentID, Appointment editedAppointment, int h, int d, int m, int y);
+        Task<Appointment> createAppointmentAsync(CreatingAppointmentDTO creatingAppointment, int h, int d, int m, int y);
     }
 }

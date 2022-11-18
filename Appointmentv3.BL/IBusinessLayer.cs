@@ -25,7 +25,7 @@ namespace Appointmentv3.BL
         List<Medicine> getMedicine();
         void CreateMedicine(string medicineName);
         Appointment getAppointment(int appointmentID);
-        Appointment editAppointment(int appointmentID, Appointment editedAppointment);
-        Appointment createAppointment(CreatingAppointmentDTO creatingAppointment);
+        Appointment editAppointment(int appointmentID, Appointment editedAppointment, int h, int d, int m, int y);
+        Appointment createAppointment(CreatingAppointmentDTO creatingAppointment, int h, int d, int m, int y);
     }
 }

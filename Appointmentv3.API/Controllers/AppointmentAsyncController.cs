@@ -32,12 +32,12 @@ namespace Appointmentv3.API.Controllers
         }
 
         [HttpPost]
-        [Route("api/async/Appointment")]
-        public async Task<IHttpActionResult> PostAppointment(CreatingAppointmentDTO creatingAppointment)
+        [Route("api/async/Appointment/{h}/{d}/{m}/{y}")]
+        public async Task<IHttpActionResult> PostAppointment(CreatingAppointmentDTO creatingAppointment, int h, int d, int m, int y)
         {
             if (!ModelState.IsValid)
                 throw new HttpException(400, "All fields not filled");
-            Appointment appt = await repo.createAppointmentAsync(creatingAppointment);
+            Appointment appt = await repo.createAppointmentAsync(creatingAppointment, h, d, m ,y);
             if (appt == null)
                 throw new HttpException(404, "Appointment not created");
             return Created($"api/GetAppointmentDetails/{appt.AppointmentID}", appt);
@@ -45,12 +45,12 @@ namespace Appointmentv3.API.Controllers
         }
 
         [HttpPut]
-        [Route("api/async/Appointment/AppointmentID/{appointmentID}")]
-        public async Task<IHttpActionResult> editAppointment(int appointmentID, Appointment editedAppointment)
+        [Route("api/async/Appointment/AppointmentID/{appointmentID}/{h}/{d}/{m}/{y}")]
+        public async Task<IHttpActionResult> editAppointment(int appointmentID, Appointment editedAppointment, int h, int d, int m, int y)
         {
             if (!ModelState.IsValid)
                 throw new HttpException(400, "All fields not filled");
-            await repo.editAppointmentAsync(appointmentID, editedAppointment);
+            await repo.editAppointmentAsync(appointmentID, editedAppointment, h, d, m, y);
             return Ok();
         }
     }

@@ -19,7 +19,7 @@ namespace Appointmentv3.BL
             this.repo = repo;
         }
 
-        public Appointment createAppointment(CreatingAppointmentDTO creatingAppointment)
+        public Appointment createAppointment(CreatingAppointmentDTO creatingAppointment, int h, int d, int m, int y)
         {
             if (creatingAppointment == null)
                 return null;
@@ -34,7 +34,7 @@ namespace Appointmentv3.BL
             Appointment appointment = new Appointment();
             appointment.PetID = creatingAppointment.PetID;
             appointment.DoctorID = creatingAppointment.DoctorID;
-            appointment.AppointmentDate = creatingAppointment.AppoitmentDate;
+            appointment.AppointmentDate = new DateTime(y, m, d, h, 0, 0);
             appointment.Reason = creatingAppointment.Reason;
             appointment.ObservedPetIssues = new List<ObservedPetIssue>();
             foreach (var id in creatingAppointment.PetIssues)
@@ -96,8 +96,9 @@ namespace Appointmentv3.BL
             this.repo.CreateTest(testName);
         }
 
-        public Appointment editAppointment(int appointmentID, Appointment editedAppointment)
+        public Appointment editAppointment(int appointmentID, Appointment editedAppointment, int h, int d, int m, int y)
         {
+            editedAppointment.AppointmentDate = new DateTime(y, m, d, h, 0, 0);
             return this.repo.editAppointment(appointmentID, editedAppointment);
         }
 
