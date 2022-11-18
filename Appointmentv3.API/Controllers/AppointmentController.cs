@@ -32,12 +32,12 @@ namespace Appointmentv3.API.Controllers
         }
 
         [HttpPost]
-        [Route("api/Appointment")]
-        public IHttpActionResult PostAppointment(CreatingAppointmentDTO creatingAppointment)
+        [Route("api/Appointment/{h}/{d}/{m}/{y}")]
+        public IHttpActionResult PostAppointment(CreatingAppointmentDTO creatingAppointment, int h, int d, int m, int y)
         {
             if (!ModelState.IsValid)
                 throw new HttpException(400, "All fields not filled");
-            Appointment appt = repo.createAppointment(creatingAppointment);
+            Appointment appt = repo.createAppointment(creatingAppointment, h, d, m, y);
             if (appt == null)
                 throw new HttpException(404, "Appointment not created");
             return Created($"api/GetAppointmentDetails/{appt.AppointmentID}", appt);
@@ -45,12 +45,12 @@ namespace Appointmentv3.API.Controllers
         }
 
         [HttpPut]
-        [Route("api/Appointment/AppointmentID/{appointmentID}")]
-        public IHttpActionResult editAppointment(int appointmentID, Appointment editedAppointment)
+        [Route("api/Appointment/AppointmentID/{appointmentID}/{h}/{d}/{m}/{y}")]
+        public IHttpActionResult editAppointment(int appointmentID, Appointment editedAppointment, int h, int d, int m, int y)
         {
             if (!ModelState.IsValid)
                 throw new HttpException(400, "All fields not filled");
-            repo.editAppointment(appointmentID, editedAppointment);
+            repo.editAppointment(appointmentID, editedAppointment, h, d, m, y);
             return Ok();
         }
     }
